@@ -4,10 +4,10 @@
     Monopolipeli "1" -- "1" Pelilauta
     Pelilauta "1" -- "40" Ruutu
     class Ruutu{
-        aloitusruutu
-        vankila
+        aloitusruutu()
+        vankila()
         sattuma_ja_yhteismaa()
-        asemat ja laitokset
+        asemat_ja_laitokset()
         normaalit_kadut()
     }
     Ruutu "1" -- "3" Toiminto
