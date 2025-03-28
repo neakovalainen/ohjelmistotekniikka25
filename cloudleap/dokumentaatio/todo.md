@@ -1,6 +1,6 @@
 1. erittele luokkiin meow DONE 
-2. erittele luokkiin pointcollector
-3. selvitä super??
+2. erittele luokkiin pointcollector DONEEEE
+3. selvitä super?? DONEEEE
 4. osuu yhteen, juoma katoaa
 5. pisteet/energiataso +1
 6. tee yks testi!
