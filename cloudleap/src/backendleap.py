@@ -3,13 +3,13 @@ import os
 # game character created by @snackanimals on twitter/X
 dirname = os.path.dirname(__file__)
 
-class InitializeGame(pygame.sprite.Sprite):
+class InitializeGame():
     def __init__(self):
         pygame.init()
-        super().__init__()
 
         self.player = Meow(550, 500) # create a player
         self.screen = pygame.display.set_mode((1280, 720))
+        self.font = pygame.font.SysFont("Times New Roman", 30)
         self.clock = pygame.time.Clock()
         self.energy = PointCollector(1000, 500) # create and position collectables
         self.obstaclespawner = ObstacleSpawner()
@@ -26,6 +26,8 @@ class InitializeGame(pygame.sprite.Sprite):
         self.screen.fill("white")
         self.screen.blit(self.player.meow, (self.player.x, self.player.y))
         self.screen.blit(self.energy.img, (self.energy.x, self.energy.y))
+        text = self.font.render("current energy:" + str(self.energy.points), True, ("black"))
+        self.screen.blit(text, (20, 20))
         pygame.display.set_caption("cloudleap")
         pygame.display.flip()
 
@@ -102,11 +104,10 @@ class PointCollector(pygame.sprite.Sprite): # collectable
         # function for collectable item spawning
         pass
 
-    def collision_detector(self, player, group):
-        if pygame.sprite.collide_rect(player, group):
-            print("collision detected")
-            self.x += 100
-            self.y += 20
+    def collision_detector(self, player, energy):
+        if pygame.sprite.collide_rect(player, energy):
+            self.points += 1
+
 
     def update_rects(self, meow):
         self.rect.topleft = (self.x, self.y)

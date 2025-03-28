@@ -19,6 +19,8 @@ python = ">=3.10,<3.13"
 cowsay = "^6.1"
 pygame = "^2.6.1"
 invoke = "^2.2.0"
+pytest = "^8.3.5"
+coverage = "^7.7.1"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
