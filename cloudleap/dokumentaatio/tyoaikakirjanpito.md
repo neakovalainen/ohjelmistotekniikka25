@@ -7,5 +7,9 @@
 - 3h käytetty työn pohjan luontiin ja käynnistämiseen (aikaa kului wsl ongelmien kanssa. lopulta hylkäsin sen ja käytän nyt git bash)
 - hahmo saatu hyppimään
 
-# 28.03.25
+# 27.03.25
 - 1h käytetty, pääluokan jakaminen pienempiin luokkiin, energiajuoma näytölle
+
+# 28.03.25
+- 4h käytetty, luokkajako toteutettu paremmin, käyttäjän osuessa energiajuomaan energia kasvaa ja tulee ruudulle näkyviin
+- debuggaus vei yhteensä noin tunnin + spriten käyttöön kului myös paljon aikaa (en ole aiemmin käyttänyt)

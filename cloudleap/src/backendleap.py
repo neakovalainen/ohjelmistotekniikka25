@@ -93,7 +93,7 @@ class PointCollector(pygame.sprite.Sprite): # collectable
     def __init__(self, x, y):
         super().__init__()
         self.image = pygame.image.load('src/assets/energy.png')
-        self.img = pygame.transform.scale(self.image, (34, 95)) #right size image
+        self.img = pygame.transform.scale(self.image, (13, 38)) #right size image
         self.x = x
         self.y = y
         self.points = 0

@@ -1,6 +1,5 @@
 # Ohjemistotekniikka harjoitustyö
-__cloudleap__, yksinkertainen _tasohyppelypeli_
+__cloudleap__ on yksinkertainen tasohyppelypeli, jossa käyttäjä voi kerätä energiajuomia nostaakseen energiatasoonsa/pisteitään. Pelissä vastaan tulee koulutehtäviä, jotka vähentävät pisteitä. Käyttäjän pitää pyrkiä välttelemään niitä parhaansa mukaan.
 
-[laskarit](https://github.com/neakovalainen/ohjelmistotekniikka25/tree/main/laskarit) \
 [vaatimusmäärittely](https://github.com/neakovalainen/ohjelmistotekniikka25/tree/main/cloudleap/dokumentaatio/vaatimusmaarittely.md) \
 [työaikakirjanpito](https://github.com/neakovalainen/ohjelmistotekniikka25/tree/main/cloudleap/dokumentaatio/tyoaikakirjanpito.md)
