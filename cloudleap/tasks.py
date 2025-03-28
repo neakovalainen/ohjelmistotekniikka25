@@ -2,7 +2,7 @@ from invoke import task
 
 @task
 def start(ctx):
-    ctx.run("python3 src/index.py", pty=True)
+    ctx.run("python3 src/backendleap.py", pty=True)
 
 @task
 def coverage(ctx):
@@ -11,3 +11,7 @@ def coverage(ctx):
 @task(coverage)
 def coverage_report(ctx):
     ctx.run("coverage html", pty=True)
+
+@task
+def test(ctx):
+    ctx.run("pytest src", pty=True)
