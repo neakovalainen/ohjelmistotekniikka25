@@ -1,5 +1,6 @@
-import pygame
 import os
+import pygame
+import random
 # game character created by @snackanimals on twitter/X
 dirname = os.path.dirname(__file__)
 
@@ -13,7 +14,7 @@ class InitializeGame():
         self.clock = pygame.time.Clock()
         self.energy = PointCollector(1000, 500) # create and position collectables
         self.obstaclespawner = ObstacleSpawner()
-        self.sprites = pygame.sprite.Group() # creates a group of all sprites, to keep track of collision
+        self.sprites = pygame.sprite.Group() # group of all sprites, keeps track of collision
         self.add_sprites()
         self.game_loop()
 
@@ -36,8 +37,9 @@ class InitializeGame():
 
         while running:
             self.close_check()
+            self.energy.obtainableposition()
             self.player.forward_check()
-            self.player.backwards_check() 
+            self.player.backwards_check()
             self.player.jump_check()
             self.energy.collision_detector(self.player, self.energy)
             self.energy.update_rects(self.player)
@@ -61,14 +63,14 @@ class Meow(pygame.sprite.Sprite): # player location, movement etc.
         self.y = y
         self.jumping = False
         self.jump_force = 20
-        self.rect = pygame.Rect(self.x, self.y, self.meow.get_width(), self.meow.get_height()) 
+        self.rect = pygame.Rect(self.x, self.y, self.meow.get_width(), self.meow.get_height())
 
     def jump_check(self):
-        if self.jumping == False:
+        if not self.jumping:
             keys = pygame.key.get_pressed()
             if keys[pygame.K_SPACE] or keys[pygame.K_UP]:
                 self.jumping = True
-        
+
         if self.jumping:
             self.y -= self.jump_force
             self.jump_force -= 1
@@ -77,7 +79,7 @@ class Meow(pygame.sprite.Sprite): # player location, movement etc.
                 self.jumping = False
                 self.jump_force = 20
 
-    def forward_check(self):    
+    def forward_check(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT] and self.x <= 1280 - self.meow.get_width():
             self.x += 2
@@ -87,7 +89,6 @@ class Meow(pygame.sprite.Sprite): # player location, movement etc.
         if keys[pygame.K_LEFT]:
             self.x -= 2
 
-        
 
 class PointCollector(pygame.sprite.Sprite): # collectable
     def __init__(self, x, y):
@@ -98,24 +99,29 @@ class PointCollector(pygame.sprite.Sprite): # collectable
         self.y = y
         self.points = 0
         self.best_score = 0
-        self.rect = pygame.Rect(self.x, self.y, self.img.get_width(), self.img.get_height()) 
-    
-    def obtainableposition():
+        self.rect = pygame.Rect(self.x, self.y, self.img.get_width(), self.img.get_height())
+
+    def obtainableposition(self):
         # function for collectable item spawning
-        pass
+        print(self.x, self.y)
+        if self.x < 0:
+            self.x = random.randint(1280, 2000)
+        else:
+            self.x -= 1
+
+    def energy_consumed(self):
+        self.x += random.randint(1280, 2000)
 
     def collision_detector(self, player, energy):
         if pygame.sprite.collide_rect(player, energy):
             self.points += 1
+            self.energy_consumed()
 
 
     def update_rects(self, meow):
         self.rect.topleft = (self.x, self.y)
         meow.rect.topleft = (meow.x, meow.y)
 
-            
-
-        
 
 class ObstacleSpawner:
     def __init__(self):
