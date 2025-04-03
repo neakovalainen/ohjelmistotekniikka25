@@ -13,3 +13,10 @@
 # 28.03.25
 - 4h käytetty, luokkajako toteutettu paremmin, käyttäjän osuessa energiajuomaan energia kasvaa ja tulee ruudulle näkyviin
 - debuggaus vei yhteensä noin tunnin + spriten käyttöön kului myös paljon aikaa (en ole aiemmin käyttänyt)
+
+# 02.04.25
+- 2h käytetty, energiajuoma katoaa kun siihen osuu, pisteet nousee vain yhdellä
+    -> energiajuoma liikkuu oikealta vasemmalle
+- nyt käyttäjän hyppiminen toimii hiukan paremmin
+
+# 03.04.25

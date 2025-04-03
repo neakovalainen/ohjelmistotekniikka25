@@ -16,8 +16,8 @@
 1. juoma katoaa kun siihen osunut DONEEE
 2. energiataso nousee yhellä DONEEE
 3. juoma spawnaa jonnekkin näytölle DONEEE
-4. este näytölle ja se liikkuu (yhtä nopee kun juoma)
-5. esteen päälle voi hypätä
+4. este näytölle ja se liikkuu (yhtä nopee kun juoma) DONEEE
+5. esteen päälle voi hypätä DONEEE
 6. + 2-3 testiä
 7. pylint alle 10 virhettä
 8. poetry run invoke lint
