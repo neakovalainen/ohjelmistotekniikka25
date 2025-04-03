@@ -20,3 +20,5 @@
 - nyt käyttäjän hyppiminen toimii hiukan paremmin
 
 # 03.04.25
+- 3h käytetty, tasot lisätty
+    -> niiden päälle voi hypätä, ja kyydistä voi pudota
