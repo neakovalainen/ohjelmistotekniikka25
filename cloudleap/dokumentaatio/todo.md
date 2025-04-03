@@ -24,3 +24,4 @@
 9. tee jonkinnälönen kaavio in arkkitehtuuri.md + linkki repoon
 10. päivitä changelog
 11. tuntikirjanpito update, tuntien summa
+12. optional jos aikaa, koulutehtävät spawnattu ruudulle ja niihin osuminen vähentää energiatasoa.

@@ -4,15 +4,17 @@ import random
 # game character created by @snackanimals on twitter/X
 dirname = os.path.dirname(__file__)
 
+GROUND_HEIGHT = 500
+
 class InitializeGame():
     def __init__(self):
         pygame.init()
 
-        self.player = Meow(550, 500) # create a player
+        self.player = Meow(550, GROUND_HEIGHT) # create a player
         self.screen = pygame.display.set_mode((1280, 720))
         self.font = pygame.font.SysFont("Times New Roman", 30)
         self.clock = pygame.time.Clock()
-        self.energy = PointCollector(1000, 500) # create and position collectables
+        self.energy = PointCollector(1000, 600) # create and position collectables
         self.obstaclespawner = ObstacleSpawner()
         self.sprites = pygame.sprite.Group() # group of all sprites, keeps track of collision
         self.add_sprites()
@@ -73,9 +75,10 @@ class Meow(pygame.sprite.Sprite): # player location, movement etc.
 
         if self.jumping:
             self.y -= self.jump_force
-            self.jump_force -= 1
+            self.jump_force -= 0.60
 
-            if self.jump_force < -20:
+            if GROUND_HEIGHT <= self.y:
+                self.y = GROUND_HEIGHT
                 self.jumping = False
                 self.jump_force = 20
 
@@ -107,7 +110,7 @@ class PointCollector(pygame.sprite.Sprite): # collectable
         if self.x < 0:
             self.x = random.randint(1280, 2000)
         else:
-            self.x -= 1
+            self.x -= 4
 
     def energy_consumed(self):
         self.x += random.randint(1280, 2000)
