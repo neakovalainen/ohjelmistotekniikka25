@@ -15,7 +15,7 @@ class InitializeGame():
         self.font = pygame.font.SysFont("Times New Roman", 30)
         self.clock = pygame.time.Clock()
         self.energy = PointCollector(1000, 600) # create and position collectables
-        self.obstaclespawner = ObstacleSpawner()
+        self.obstaclespawner = ObstacleSpawner(100, 100)
         self.sprites = pygame.sprite.Group() # group of all sprites, keeps track of collision
         self.add_sprites()
         self.game_loop()
@@ -29,6 +29,7 @@ class InitializeGame():
         self.screen.fill("white")
         self.screen.blit(self.player.meow, (self.player.x, self.player.y))
         self.screen.blit(self.energy.img, (self.energy.x, self.energy.y))
+        self.screen.blit(self.obstaclespawner.img1, (self.obstaclespawner.x, self.obstaclespawner.y))
         text = self.font.render("current energy:" + str(self.energy.points), True, ("black"))
         self.screen.blit(text, (20, 20))
         pygame.display.set_caption("cloudleap")
@@ -44,7 +45,7 @@ class InitializeGame():
             self.player.backwards_check()
             self.player.jump_check()
             self.energy.collision_detector(self.player, self.energy)
-            self.energy.update_rects(self.player)
+            self.energy.update_rects(self.player, self.obstaclespawner)
             self.display()
             self.clock.tick(60)
 
@@ -54,6 +55,7 @@ class InitializeGame():
         #self.sprites.add(self.energy)
         print("Player rect:", self.player.rect)
         print("Obtainable rect:", self.energy.rect)
+        print("obstacle rect:", self.obstaclespawner.rect)
 
 
 class Meow(pygame.sprite.Sprite): # player location, movement etc.
@@ -121,14 +123,22 @@ class PointCollector(pygame.sprite.Sprite): # collectable
             self.energy_consumed()
 
 
-    def update_rects(self, meow):
+    def update_rects(self, meow, obstacle):
         self.rect.topleft = (self.x, self.y)
         meow.rect.topleft = (meow.x, meow.y)
+        obstacle.rect.topleft = (obstacle.x, obstacle.y)
 
 
 class ObstacleSpawner:
-    def __init__(self):
+    def __init__(self, x, y):
+        self.img1 = pygame.image.load('src/assets/pilvi1.png')
+        self.x = x
+        self.y = y
+        self.rect = pygame.Rect(self.x, self.y, self.img1.get_width(), self.img1.get_height())
+    
+    def obstacleposition(self):
         pass
+
 
 if __name__=="__main__":
     InitializeGame()
