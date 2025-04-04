@@ -25,3 +25,4 @@
 10. päivitä changelog
 11. tuntikirjanpito update, tuntien summa
 12. optional jos aikaa, koulutehtävät spawnattu ruudulle ja niihin osuminen vähentää energiatasoa.
+13. at some point, hyppääminen pilven päältä, nyt ei toimi oikein
