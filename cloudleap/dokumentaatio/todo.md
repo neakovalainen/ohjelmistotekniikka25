@@ -18,9 +18,9 @@
 3. juoma spawnaa jonnekkin näytölle DONEEE
 4. este näytölle ja se liikkuu (yhtä nopee kun juoma) DONEEE
 5. esteen päälle voi hypätä DONEEE
-6. + 2-3 testiä
-7. pylint alle 10 virhettä
-8. poetry run invoke lint
+6. + 2-3 testiä DONEEE, atm coverage = 42%
+7. pylint alle 10 virhettä DONEEE, mitä teen module virheille?
+8. poetry run invoke lint, DONEEE -> testaa fuksiläppäril toimivuus
 9. tee jonkinnälönen kaavio in arkkitehtuuri.md + linkki repoon
 10. päivitä changelog
 11. tuntikirjanpito update, tuntien summa
