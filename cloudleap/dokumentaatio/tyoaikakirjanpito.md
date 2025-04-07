@@ -22,3 +22,11 @@
 # 03.04.25
 - 3h käytetty, tasot lisätty
     -> niiden päälle voi hypätä, ja kyydistä voi pudota
+
+# 04.04.25
+- 1h käytetty, testit kirjoitettu ja InitializeGame siirretty erilliseen tiedostoon (+arkkitehtuuri.md)
+
+# 07.04.25
+- 4h käytetty, esteet lisätty, peli alkaa vasta kun pelaaja aloittaa sen painamalla SPACE, päivitetty README.md ja ylipäätään dokumentaatio
+- tunnit tähän asti: 19
+

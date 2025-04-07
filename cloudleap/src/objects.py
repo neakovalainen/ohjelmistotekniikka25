@@ -22,6 +22,7 @@ class Meow(pygame.sprite.Sprite): # player location, movement etc.
             keys = pygame.key.get_pressed()
             if keys[pygame.K_SPACE] or keys[pygame.K_UP]:
                 self.jumping = True
+                return True
 
         if self.jumping:
             self.y -= self.jump_force
@@ -39,11 +40,13 @@ class Meow(pygame.sprite.Sprite): # player location, movement etc.
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT] and self.x <= 1280 - self.meow.get_width():
             self.x += 2
+            return True
 
     def backwards_check(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             self.x -= 2
+            return True
 
 
 class PointCollector(pygame.sprite.Sprite):
@@ -57,11 +60,12 @@ class PointCollector(pygame.sprite.Sprite):
         self.best_score = 0
         self.rect = pygame.Rect(self.x, self.y, self.img.get_width(), self.img.get_height())
 
-    def obtainableposition(self):
-        if self.x < 0:
-            self.x = random.randint(1280, 2000)
-        else:
-            self.x -= 4
+    def obtainableposition(self, game_started):
+        if game_started:
+            if self.x < 0:
+                self.x = random.randint(1280, 2000)
+            else:
+                self.x -= 4
 
     def energy_consumed(self):
         self.x += random.randint(1280, 2000)
@@ -71,10 +75,11 @@ class PointCollector(pygame.sprite.Sprite):
             self.points += 1
             self.energy_consumed()
 
-    def update_rects(self, meow, cloud):
+    def update_rects(self, meow, cloud, enemy):
         self.rect.topleft = (self.x, self.y)
         meow.rect.topleft = (meow.x, meow.y)
         cloud.rect.topleft = (cloud.x, cloud.y)
+        enemy.rect.topleft = (enemy.x, enemy.y)
 
 
 class CloudSpawner(pygame.sprite.Sprite):
@@ -85,11 +90,12 @@ class CloudSpawner(pygame.sprite.Sprite):
         self.y = y
         self.rect = pygame.Rect(self.x, self.y, self.img1.get_width(), self.img1.get_height())
 
-    def cloudposition(self):
-        if self.x < -500:
-            self.x = random.randint(1280, 2000)
-        else:
-            self.x -= 4
+    def cloudposition(self, game_started):
+        if game_started:
+            if self.x < -500:
+                self.x = random.randint(1280, 2000)
+            else:
+                self.x -= 4
 
     def cloudcollision(self, player):
         player_next_pos = player.rect.bottom + player.jump_force
@@ -102,10 +108,35 @@ class CloudSpawner(pygame.sprite.Sprite):
 
         above_ground = player.y < GROUND_HEIGHT
 
-        distance = abs((player.rect.left + player.meow.get_width()) - self.rect.right) # has player passed the cloud
+        distance = abs((player.rect.left + player.meow.get_width()) - self.rect.right)
 
         if player.is_falling() and in_cloud and would_touch:
             player.jumping = False
 
         if not in_cloud and above_ground and player.rect.left > self.rect.right and distance < 200:
             player.y += 10
+
+class MinusEnergy:
+    def __init__(self, x, y):
+        super().__init__()
+        self.image = pygame.image.load('src/assets/computarr.png')
+        self.img = pygame.transform.scale(self.image, (64, 61.5))
+        self.x = x
+        self.y = y
+        self.rect = pygame.Rect(self.x, self.y, self.img.get_width(), self.img.get_height())
+
+    def negative_collision(self, player, energy, enemy):
+        if pygame.sprite.collide_rect(player, enemy):
+            energy.points -= 1
+            self.enemy_hit()
+
+    def enemy_position(self, game_started):
+        if game_started:
+            if self.x < 0:
+                self.x = random.randint(1280, 1500)
+            else:
+                self.x -= 4
+
+    def enemy_hit(self):
+        self.x = random.randint(1280, 2000)
+7

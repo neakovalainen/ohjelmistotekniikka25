@@ -11,3 +11,5 @@
     -> kun pilvi liikkuu tarpeeksi, pelaaja tippuu pilveltä 
 - energiajuoma liikkuu samaa tahtia kun pilvi \
     -> kun siihen osuu, energiataso nousee yhdellä ja juoma katoaa
+- ruudulla liikkuu esteitä, joihin osuminen vähentää pisteitä
+- peli alkaa vasta kun pelaaja aloittaa sen
