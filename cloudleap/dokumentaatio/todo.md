@@ -21,7 +21,7 @@
 6. + 2-3 testiä DONEEE, atm coverage = 42%
 7. pylint alle 10 virhettä DONEEE, mitä teen module virheille?
 8. poetry run invoke lint, DONEEE -> testaa fuksiläppäril toimivuus
-9. tee jonkinnälönen kaavio in arkkitehtuuri.md + linkki repoon
+9. tee jonkinnälönen kaavio in arkkitehtuuri.md + linkki repoon DONEEE
 10. päivitä changelog
 11. tuntikirjanpito update, tuntien summa
 12. optional jos aikaa, koulutehtävät spawnattu ruudulle ja niihin osuminen vähentää energiatasoa.
