@@ -30,3 +30,7 @@
 - 4h käytetty, esteet lisätty, peli alkaa vasta kun pelaaja aloittaa sen painamalla SPACE, päivitetty README.md ja ylipäätään dokumentaatio
 - tunnit tähän asti: 19
 
+# 08.04.25
+- 1h käytetty
+- arkkitehtuuri päivitetty, fontin muuto(jotta voi käyttää teksti emojeita)
+
