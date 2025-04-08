@@ -11,11 +11,12 @@ class InitializeGame():
         pygame.init()
 
         self.player = Meow(550, GROUND_HEIGHT) # create a player
-        self.screen = pygame.display.set_mode((1280, 720))
-        self.clock = pygame.time.Clock()
         self.energy = PointCollector(1700, 600) # create and position collectables
         self.cloudspawner = CloudSpawner(1500, 500)
         self.enemy = MinusEnergy(3000, 600)
+        self.screen = pygame.display.set_mode((1280, 720))
+        self.clock = pygame.time.Clock()
+        self.font = pygame.font.Font("src/assets/unifont-16.0.02.otf", 30)
         self.sprites = pygame.sprite.Group() # group of all sprites, keeps track of collision
         self.add_sprites()
         self.game_started = False
@@ -28,7 +29,7 @@ class InitializeGame():
 
     def display(self):
         self.screen.fill("white")
-        self.font = pygame.font.SysFont("Times New Roman", 30)
+        self.font = pygame.font.Font("src/assets/unifont-16.0.02.otf", 30)
         #pygame.draw.rect(self.screen, "black", self.player.rect) # rect for debugging
         #pygame.draw.rect(self.screen, "red", self.cloudspawner.rect)
         self.screen.blit(self.player.meow, (self.player.x, self.player.y))
@@ -36,7 +37,7 @@ class InitializeGame():
         self.screen.blit(self.cloudspawner.img1, (self.cloudspawner.x, self.cloudspawner.y))
         self.screen.blit(self.enemy.img, (self.enemy.x, self.enemy.y))
         text = self.font.render("current energy:" + str(self.energy.points), True, ("black"))
-        start = self.font.render("start game by pressing space", True, ("black"))
+        start = self.font.render("start game by pressing space (づ ◕‿◕ )づ", True, ("black"))
         self.screen.blit(text, (20, 20))
         self.screen.blit(start, (300, 20))
         pygame.display.set_caption("cloudleap")

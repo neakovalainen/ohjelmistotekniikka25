@@ -22,7 +22,6 @@ class Meow(pygame.sprite.Sprite): # player location, movement etc.
             keys = pygame.key.get_pressed()
             if keys[pygame.K_SPACE] or keys[pygame.K_UP]:
                 self.jumping = True
-                return True
 
         if self.jumping:
             self.y -= self.jump_force
@@ -40,13 +39,11 @@ class Meow(pygame.sprite.Sprite): # player location, movement etc.
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT] and self.x <= 1280 - self.meow.get_width():
             self.x += 2
-            return True
 
     def backwards_check(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             self.x -= 2
-            return True
 
 
 class PointCollector(pygame.sprite.Sprite):
@@ -139,4 +136,3 @@ class MinusEnergy:
 
     def enemy_hit(self):
         self.x = random.randint(1280, 2000)
-7
