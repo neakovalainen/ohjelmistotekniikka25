@@ -33,4 +33,5 @@
 # 08.04.25
 - 1h käytetty
 - arkkitehtuuri päivitetty, fontin muuto(jotta voi käyttää teksti emojeita)
+- tunnit tähän asti: 20
 
