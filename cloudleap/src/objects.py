@@ -120,12 +120,14 @@ class MinusEnergy:
         self.img = pygame.transform.scale(self.image, (64, 61.5))
         self.x = x
         self.y = y
+        self.enemies_hit = 0
         self.rect = pygame.Rect(self.x, self.y, self.img.get_width(), self.img.get_height())
 
-    def negative_collision(self, player, energy, enemy):
+    def negative_collision(self, player, energy, enemy, game_over):
         if pygame.sprite.collide_rect(player, enemy):
             energy.points -= 1
-            self.enemy_hit()
+            self.enemies_hit += 1
+            self.enemy_hit(energy, game_over)
 
     def enemy_position(self, game_started):
         if game_started:
@@ -134,5 +136,10 @@ class MinusEnergy:
             else:
                 self.x -= 4
 
-    def enemy_hit(self):
-        self.x = random.randint(1280, 2000)
+    def enemy_hit(self, energy, game_over):
+        if energy.points < 0:
+            game_over = True
+        if self.enemies_hit > 5:
+            game_over = True
+        else:
+            self.x = random.randint(1280, 2000)
