@@ -299,6 +299,20 @@ files = [
 ]
 
 [[package]]
+name = "pygame-textinput"
+version = "1.0.1"
+description = "Enter text using pygame"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pygame-textinput-1.0.1.tar.gz", hash = "sha256:31efab5b171c179553ebc226ba3e639802be3b6d7b224f01fe3b6064effe5a5d"},
+    {file = "pygame_textinput-1.0.1-py3-none-any.whl", hash = "sha256:0aea142473c5651f87cb08a1af41a77137a89688aa4dae2677603da7565cff36"},
+]
+
+[package.dependencies]
+pygame = "*"
+
+[[package]]
 name = "pylint"
 version = "3.3.6"
 description = "python code static checker"
@@ -415,4 +429,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.13"
-content-hash = "63e0f60fc8123069f222cf82d2c8173b14d3037055829f94f4493898b9042e76"
+content-hash = "d6b4f22c8776c196b0a22572b14d9872a083a1217442f25ab2556693ae407727"

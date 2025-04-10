@@ -26,3 +26,16 @@
 11. tuntikirjanpito update, tuntien summa 
 12. optional jos aikaa, koulutehtävät spawnattu ruudulle ja niihin osuminen vähentää energiatasoa.
 13. at some point, hyppääminen pilven päältä, nyt ei toimi oikein
+
+# viikko 5
+1. selvitä miten text input ruudulle
+2. sql initialization
+2.5. mahdollista kirjautuminen
+2.75 parhaat tai ylipäätään tulokset näkyy ruudulla
+3. tee release (vasta kun viikon muut jutut on done)
+4. koodikatselmointi check
+5. 2-5 testiä lisää, vähintään 40% pitää olla testattuna
+6. paranna rakennetta ja laatua jos on aikaa
+7. pylint virheitä alle 5
+8. lisää jotain oleellista toiminnallisuutta kuvaava sekvenssikaavio
+9. päivitä sekvenssikaavio, tuntikirjanpito
