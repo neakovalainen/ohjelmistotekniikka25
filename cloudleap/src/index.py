@@ -4,6 +4,7 @@ from objects import Meow, PointCollector, CloudSpawner, MinusEnergy
 from userdata import UserData
 from textmanager import TextManager
 from sql_connect import get_database_connection
+
 # game character created by @snackanimals on twitter/X
 dirname = os.path.dirname(__file__)
 
@@ -12,7 +13,6 @@ GROUND_HEIGHT = 500
 class InitializeGame():
     def __init__(self):
         pygame.init()
-
         self.player = Meow(550, GROUND_HEIGHT)
         self.energy = PointCollector(1700, 600)
         self.cloudspawner = CloudSpawner(1500, 500)
@@ -22,10 +22,10 @@ class InitializeGame():
         self.font = pygame.font.Font("src/assets/unifont-16.0.02.otf", 30)
         self.sprites = pygame.sprite.Group() # group of all sprites, keeps track of collision
         self.user_data = UserData(get_database_connection())
-        self.textmanager = TextManager(self.energy, self.screen, self.user_data)
+        self.logging_in = True
+        self.textmanager = TextManager(self.energy, self.screen, self.user_data, self.logging_in)
         self.game_started = False
         self.game_over = False
-        self.logging_in = True
 
         self.add_sprites()
         self.game_loop()
@@ -42,18 +42,20 @@ class InitializeGame():
             self.screen.blit(self.textmanager.textinput.surface, (10, 140))
         self.textmanager.draw_texts()
         pygame.display.set_caption("cloudleap")
-        pygame.display.flip()
+        #pygame.display.flip()
 
     def game_loop(self):
         while True:
             if not self.game_started:
                 self.space_check()
-            self.event_check()
+            #self.event_check()
             self.position_check(self.energy, self.enemy, self.cloudspawner, self.game_started)
             self.moving_check(self.player)
             self.collision_check(self.player, self.energy, self.enemy, self.game_over)
             self.energy.update_rects(self.player, self.cloudspawner, self.enemy)
             self.display()
+            self.event_check()
+            pygame.display.flip()
             self.clock.tick(60)
 
     def event_check(self):
@@ -63,6 +65,7 @@ class InitializeGame():
                 pygame.quit()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
                 self.logging_in = False
+                self.textmanager.login()
                 username = self.textmanager.textinput.value
                 self.textmanager.username_update(username)
                 if not self.username_check(username):
@@ -71,6 +74,7 @@ class InitializeGame():
 
         if self.logging_in:
             self.textmanager.textinput.update(events)
+        self.textmanager.button_update(events)
 
     def username_check(self, username):
         all_users = self.user_data.get_all_users()

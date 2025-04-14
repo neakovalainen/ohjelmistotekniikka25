@@ -313,6 +313,20 @@ files = [
 pygame = "*"
 
 [[package]]
+name = "pygame-widgets"
+version = "1.1.7"
+description = "Widgets for use with Pygame"
+optional = false
+python-versions = ">=3.10"
+files = [
+    {file = "pygame_widgets-1.1.7-py3-none-any.whl", hash = "sha256:7deff9be307a8c6dae5b28e7aa872fe890a6c9ccd90bc261b54b8759a65db4f0"},
+    {file = "pygame_widgets-1.1.7.tar.gz", hash = "sha256:79355283a765c6014272584f9189855a892aa3c46134f91c6cf4983b199effbe"},
+]
+
+[package.dependencies]
+pygame = ">=2.0.0"
+
+[[package]]
 name = "pylint"
 version = "3.3.6"
 description = "python code static checker"
@@ -429,4 +443,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.13"
-content-hash = "d6b4f22c8776c196b0a22572b14d9872a083a1217442f25ab2556693ae407727"
+content-hash = "fc337e96c0ed5492081856c1961530c1d50582114060a5694cac179e180da93c"
