@@ -2,8 +2,12 @@ import os
 import pygame_textinput
 import pygame
 from objects import Meow, PointCollector, CloudSpawner, MinusEnergy
+from sql_queries import initialize_database
+from userdata import UserData
+from sql_connect import get_database_connection
 # game character created by @snackanimals on twitter/X
 dirname = os.path.dirname(__file__)
+#initialize_database()
 
 GROUND_HEIGHT = 500
 
@@ -19,9 +23,13 @@ class InitializeGame():
         self.clock = pygame.time.Clock()
         self.font = pygame.font.Font("src/assets/unifont-16.0.02.otf", 30)
         self.sprites = pygame.sprite.Group() # group of all sprites, keeps track of collision
-        self.textinput = pygame_textinput.TextInputVisualizer()
+        self.textmanager = pygame_textinput.TextInputManager()
+        self.textinput = pygame_textinput.TextInputVisualizer(manager=self.textmanager)
+        self.user_data = UserData(get_database_connection())
         self.game_started = False
         self.game_over = False
+        self.logging_in = True
+        self.username = ""
 
         self.add_sprites()
         self.text_input()
@@ -29,8 +37,7 @@ class InitializeGame():
 
     def display(self):
         self.screen.fill("white")
-        text, start, user_guide1, user_guide2 = self.text_objects()
-
+        text, start, user_guide1, user_guide2, logged_in = self.text_objects()
         #pygame.draw.rect(self.screen, "black", self.player.rect) # rect for debugging
         #pygame.draw.rect(self.screen, "red", self.cloudspawner.rect)
         self.screen.blit(self.player.meow, (self.player.x, self.player.y))
@@ -39,9 +46,12 @@ class InitializeGame():
         self.screen.blit(self.enemy.img, (self.enemy.x, self.enemy.y))
         self.screen.blit(text, (20, 20))
         self.screen.blit(start, (300, 20))
-        self.screen.blit(self.textinput.surface, (10, 140))
+        if self.logging_in:
+            self.screen.blit(self.textinput.surface, (10, 140))
         self.screen.blit(user_guide1, (10, 100))
         self.screen.blit(user_guide2, (10, 120))
+        self.screen.blit(logged_in, (1000, 10))
+        self.get_users()
         pygame.display.set_caption("cloudleap")
         pygame.display.flip()
 
@@ -62,7 +72,15 @@ class InitializeGame():
         for event in events:
             if event.type == pygame.QUIT:
                 pygame.quit()
-        self.textinput.update(events)
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
+                print(f"User pressed enter! Input so far: {self.textinput.value}")
+                self.logging_in = False
+                self.username = self.textinput.value
+                self.user_data.save_username(self.username)
+                self.user_data.get_all_users()
+                print(self.username)
+        if self.logging_in:
+            self.textinput.update(events)
 
     def moving_check(self, player):
         player.forward_check()
@@ -88,14 +106,23 @@ class InitializeGame():
         self.textinput.cursor_width = 1
         self.textinput.cursor_blink_interval = 500
         self.textinput.font_object = pygame.font.Font("src/assets/unifont-16.0.02.otf", 15)
-
+    
+    def get_users(self):
+        lil_font = pygame.font.Font("src/assets/unifont-16.0.02.otf", 15)
+        y_coordinate = 50
+        for none, user in self.user_data.get_all_users():
+            user_rendered = lil_font.render(user, True, ("Black"))
+            self.screen.blit(user_rendered, (1000, y_coordinate))
+            y_coordinate += 15
+            
     def text_objects(self):
         lil_font = pygame.font.Font("src/assets/unifont-16.0.02.otf", 15)
         self.text = self.font.render("current energy:" + str(self.energy.points), True, ("black"))
         self.start = self.font.render("start game by pressing space (づ ◕‿◕ )づ", True, ("black"))
         self.guide1 = lil_font.render("write username below, if it doesn't exist,", True, ("black"))
         self.guide2 = lil_font.render("it will be created automatically:", True, ("black"))
-        return self.text, self.start, self.guide1, self.guide2
+        self.logged_in = lil_font.render("currently logged in as: " + self.username, True, ("black"))
+        return self.text, self.start, self.guide1, self.guide2, self.logged_in
 
     def add_sprites(self):
         #self.sprites.add(self.player)
