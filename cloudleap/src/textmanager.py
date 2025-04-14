@@ -16,13 +16,13 @@ class TextManager:
         #self.username = ""
         self.screen = screen
         self.user_data = user_data
-        #self.logging_in = status.logging_in
+        #self.logged_in = status.logged_in
         self.logout_button = Button(
             win=self.screen,
-            x=1000, # x
-            y=30, # y
-            width=75, # width
-            height=25, #height
+            x=1000,
+            y=30,
+            width=75,
+            height=25,
             text='log out',
             fontSize=12,
             inactiveColour=(211, 211, 211),
@@ -32,10 +32,10 @@ class TextManager:
         )
         self.delete_button = Button(
             win=self.screen,
-            x=1080, # x
-            y=30, # y
-            width=75, # width
-            height=25, #height
+            x=1080,
+            y=30,
+            width=75,
+            height=25,
             text='delete user',
             fontSize=12,
             inactiveColour=(211, 211, 211),
@@ -56,18 +56,22 @@ class TextManager:
         lil_font = pygame.font.Font("src/assets/unifont-16.0.02.otf", 15)
         text = self.font.render("current energy:" + str(self.energy.points), True, ("black"))
         start = self.font.render("start game by pressing space (づ ◕‿◕ )づ", True, ("black"))
-        guide1 = lil_font.render("write username below, if it doesn't exist,", True, ("black"))
-        guide2 = lil_font.render("it will be created automatically:", True, ("black"))
+        guide1 = lil_font.render("write username below and press enter", True, ("black"))
+        guide2 = lil_font.render("if user doesn't exist,", True, ("black"))
+        guide3 = lil_font.render("it will be created automatically:", True, ("black"))
         logged_in = lil_font.render("logged in as: " + status.username, True, ("black"))
-        return text, start, guide1, guide2, logged_in
+        return text, start, guide1, guide2, guide3, logged_in
 
     def draw_texts(self):
-        text, start, user_guide1, user_guide2, logged_in = self.text_objects()
+        text, start, user_guide1, user_guide2, user_guide3, logged_in = self.text_objects()
         self.screen.blit(text, (20, 20))
-        self.screen.blit(start, (300, 20))
-        if status.logging_in:
+        #self.screen.blit(start, (300, 20))
+        if not status.logged_in:
             self.screen.blit(user_guide1, (10, 100))
             self.screen.blit(user_guide2, (10, 120))
+            self.screen.blit(user_guide3, (10, 140))
+        if status.logged_in:
+            self.screen.blit(start, (300, 20))
         self.screen.blit(logged_in, (1000, 10))
         self.get_users()
 
@@ -76,7 +80,6 @@ class TextManager:
 
     def logout(self):
         status.logout()
-        print("should be true", status.logging_in)
         status.current_user("")
         self.textinput.value = ""
 

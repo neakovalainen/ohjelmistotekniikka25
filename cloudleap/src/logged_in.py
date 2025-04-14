@@ -1,13 +1,13 @@
 class LogInManager():
     def __init__(self):
-        self.logging_in = True
+        self.logged_in = False
         self.username = ""
 
     def login(self):
-        self.logging_in = False
+        self.logged_in = True
 
     def logout(self):
-        self.logging_in = True
+        self.logged_in = False
 
     def current_user(self, username):
         self.username = username

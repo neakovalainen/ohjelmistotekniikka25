@@ -38,15 +38,17 @@ class InitializeGame():
         self.screen.blit(self.energy.img, (self.energy.x, self.energy.y))
         self.screen.blit(self.cloudspawner.img1, (self.cloudspawner.x, self.cloudspawner.y))
         self.screen.blit(self.enemy.img, (self.enemy.x, self.enemy.y))
-        if status.logging_in:
-            self.screen.blit(self.textmanager.textinput.surface, (10, 140))
+        if not status.logged_in:
+            self.screen.blit(self.textmanager.textinput.surface, (10, 160))
         self.textmanager.draw_texts()
+        pygame.draw.line(self.screen, ("black"), (0, 640), (1280, 640))
         pygame.display.set_caption("cloudleap")
 
     def game_loop(self):
         while True:
-            if not self.game_started:
-                self.space_check()
+            if status.logged_in:
+                if not self.game_started:
+                    self.space_check()
 
             self.position_check(self.energy, self.enemy, self.cloudspawner, self.game_started)
             self.moving_check(self.player)
@@ -64,14 +66,13 @@ class InitializeGame():
                 pygame.quit()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
                 status.login()
-                print("current status", status.logging_in)
                 username = self.textmanager.textinput.value
                 status.current_user(username)
                 if not self.username_check(username):
                     self.user_data.save_username(username)
                 self.user_data.get_all_users()
 
-        if status.logging_in:
+        if not status.logged_in:
             self.textmanager.textinput.update(events)
         self.textmanager.button_update(events)
 
@@ -106,9 +107,6 @@ class InitializeGame():
         #self.sprites.add(self.player)
         #self.sprites.add(self.energy)
         #self.sprites.add(self.energy)
-        # print("Player rect:", self.player.rect)
-        # print("Obtainable rect:", self.energy.rect)
-        # print("cloud rect:", self.cloudspawner.rect)
         pass
 
 if __name__=="__main__":
