@@ -22,3 +22,5 @@ __cloudleap__ on yksinkertainen tasohyppelypeli, jossa käyttäjä voi kerätä 
 ``` poetry run invoke coverage-report```
 - pylintin saa suoritettua komennon \
 ``` poetry run invoke lint```
+
+[__ylimääräinen koodikatselmointi__](https://github.com/JuhoTurunen/chess-app/issues/1)
