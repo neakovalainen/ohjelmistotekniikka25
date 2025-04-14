@@ -6,7 +6,7 @@ def delete_tables(connection):
     cursor.execute('''
         DROP TABLE IF EXISTS Users;
     ''')
-    
+
     connection.commit()
 
 def create_tables(connection):

@@ -30,7 +30,7 @@
 # viikko 5
 1. selvitä miten text input ruudulle DONE
 2. sql initialization DONE
-2.5. mahdollista kirjautuminen
+2.5. mahdollista kirjautuminen DONEEE
 2.75 parhaat tai ylipäätään tulokset näkyy ruudulla tai et niit voi ees laskee jotenkin ueueuueue
 3. tee release (vasta kun viikon muut jutut on done)
 4. koodikatselmointi check

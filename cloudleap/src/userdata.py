@@ -1,5 +1,3 @@
-from sql_connect import get_database_connection
-from sql_queries import initialize_database
 class UserData:
     def __init__(self, connection):
         self._connection = connection
@@ -11,9 +9,21 @@ class UserData:
             INSERT INTO Users (username)
             VALUES (:username)          
             ''', {"username":username})
-        
+
         self._connection.commit()
-    
+
+    def get_username(self, username):
+        cursor = self._connection.cursor()
+
+        cursor.execute('''
+            SELECT username
+            FROM Users
+            WHERE username = :username
+            ''', {"username":username})
+
+        user = cursor.fetchone()
+        return list(user)[1]
+
     def get_all_scores(self):
         cursor = self._connection.cursor()
 
@@ -21,11 +31,11 @@ class UserData:
             SELECT *
             FROM    Scores
             ''')
-        
+
         rows = cursor.fetchall()
         print(rows)
         return []
-    
+
     def get_all_users(self):
         cursor = self._connection.cursor()
 
@@ -33,12 +43,16 @@ class UserData:
             SELECT *
             FROM    Users
             ''')
-        
+
         rows = cursor.fetchall()
         return list(rows)
-    
- #initialize_database()
-    
-#userdata = UserData(get_database_connection())
-#userdata.save_username("jeje")
-#userdata.get_all_users()
+
+    def delete_user(self, username):
+        cursor = self._connection.cursor()
+
+        cursor.execute('''
+            DELETE FROM Users
+            WHERE username = :username
+            ''', {"username":username})
+
+        self._connection.commit()
