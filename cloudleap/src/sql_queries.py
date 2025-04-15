@@ -7,6 +7,11 @@ def delete_tables(connection):
         DROP TABLE IF EXISTS Users;
     ''')
 
+    cursor.execute('''
+        DROP TABLE IF EXISTS Scores;
+    ''')
+
+
     connection.commit()
 
 def create_tables(connection):
@@ -25,6 +30,7 @@ def create_tables(connection):
             best_score  INTEGER,
             username    TEXT,
 
+            UNIQUE(username),
             FOREIGN KEY (username) REFERENCES Users(username)
                 ON DELETE CASCADE
         );

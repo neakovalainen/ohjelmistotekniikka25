@@ -47,9 +47,11 @@ class TextManager:
     def get_users(self):
         lil_font = pygame.font.Font("src/assets/unifont-16.0.02.otf", 15)
         y_coordinate = 75
-        for _ , user in self.user_data.get_all_users():
-            user_rendered = lil_font.render(user, True, ("Black"))
+        for _, score, user in self.user_data.get_all_scores():
+            user_rendered = lil_font.render(str(user), True, ("Black"))
+            score_rendered = lil_font.render(str(score), True, ("black"))
             self.screen.blit(user_rendered, (1000, y_coordinate))
+            self.screen.blit(score_rendered,(1100, y_coordinate))
             y_coordinate += 15
 
     def text_objects(self):
@@ -69,7 +71,6 @@ class TextManager:
     def draw_texts(self):
         text, start, guide1, guide2, guide3, logged_in, rules1, rules2, rules3, rules4 = self.text_objects()
         self.screen.blit(text, (20, 20))
-        #self.screen.blit(start, (300, 20))
         if not status.logged_in:
             self.screen.blit(guide1, (10, 100))
             self.screen.blit(guide2, (10, 120))
@@ -93,4 +94,5 @@ class TextManager:
 
     def delete_user(self):
         self.user_data.delete_user(status.username)
+        self.user_data.delete_score(status.username)
         self.logout()

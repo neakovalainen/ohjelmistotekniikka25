@@ -6,6 +6,7 @@ from textmanager import TextManager
 from shared_resources import status, game_status
 from sql_connect import get_database_connection
 from game_over import GameOver
+from sql_queries import initialize_database
 
 # game character created by @snackanimals on twitter/X
 dirname = os.path.dirname(__file__)
@@ -27,7 +28,6 @@ class InitializeGame():
         self.textmanager = TextManager(self.energy, self.screen, self.user_data)
         self.game_started = False
         self.game_over = False
-
         self.add_sprites()
         self.game_loop()
 
@@ -59,6 +59,12 @@ class InitializeGame():
                 self.event_check()
             else:
                 GameOver(self.screen).game_over_display(7000)
+                self.energy.best_score = self.energy.points
+                # if not self.username_check(status.username):
+                #     self.user_data.save_score(self.energy.best_score, status.username)
+                # else:
+                if self.user_data.get_score(status.username) < self.energy.best_score:
+                    self.user_data.update_score(self.energy.best_score, status.username)
                 pygame.quit()
                 break
             pygame.display.flip()
@@ -75,7 +81,7 @@ class InitializeGame():
                 status.current_user(username)
                 if not self.username_check(username):
                     self.user_data.save_username(username)
-                self.user_data.get_all_users()
+                self.user_data.get_all_scores()
 
         if not status.logged_in:
             self.textmanager.textinput.update(events)

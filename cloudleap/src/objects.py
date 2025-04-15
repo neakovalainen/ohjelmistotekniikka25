@@ -140,7 +140,7 @@ class MinusEnergy:
     def enemy_hit(self, energy):
         if energy.points < 0:
             game_status.game_lost()
-        if self.enemies_hit > 5:
+        if self.enemies_hit >= 3:
             game_status.game_lost()
         else:
             self.x = random.randint(1280, 2000)

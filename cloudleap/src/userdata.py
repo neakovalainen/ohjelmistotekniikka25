@@ -1,3 +1,5 @@
+from sql_connect import get_database_connection
+import sql_queries
 class UserData:
     def __init__(self, connection):
         self._connection = connection
@@ -12,6 +14,18 @@ class UserData:
 
         self._connection.commit()
 
+    def update_score(self, best_score, username):
+        cursor = self._connection.cursor()
+
+        cursor.execute('''
+            INSERT INTO Scores (best_score, username)
+            VALUES  (:best_score, :username)
+            ON CONFLICT(username) DO UPDATE SET
+            best_score = EXCLUDED.best_score
+            ''', {"best_score":best_score, "username":username})
+        
+        self._connection.commit()
+
     def get_username(self, username):
         cursor = self._connection.cursor()
 
@@ -23,18 +37,34 @@ class UserData:
 
         user = cursor.fetchone()
         return list(user)[1]
+    
+    def get_score(self, username):
+        cursor = self._connection.cursor()
+
+        cursor.execute('''
+            SELECT best_score
+            FROM    Scores
+            WHERE username = :username
+            ''', {"username":username})
+        
+        score = cursor.fetchone()
+        if score:
+            return list(score)[0]
+        return -2 #score cannot be -2 so if score = None return this (easier to compare in index.py)
+
 
     def get_all_scores(self):
         cursor = self._connection.cursor()
 
         cursor.execute('''
             SELECT *
-            FROM    Scores
+            FROM Scores
+            ORDER BY best_score DESC
+            LIMIT 5
             ''')
 
         rows = cursor.fetchall()
-        print(rows)
-        return []
+        return list(rows)
 
     def get_all_users(self):
         cursor = self._connection.cursor()
@@ -56,3 +86,23 @@ class UserData:
             ''', {"username":username})
 
         self._connection.commit()
+
+    def delete_score(self, username):
+        cursor = self._connection.cursor()
+
+        cursor.execute('''
+            DELETE FROM Scores
+            WHERE username = :username
+            ''', {"username":username})
+
+        self._connection.commit()
+    
+
+# connection = get_database_connection()
+# user = UserData(connection)
+# user.save_username("NENE")
+# user.update_score(1, "NENE")
+# user.update_score(3, "NENE")
+# DATA = user.get_all_scores()
+# print(DATA)
+#sql_queries.delete_tables(connection)
