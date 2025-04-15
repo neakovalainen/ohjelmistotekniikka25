@@ -60,16 +60,24 @@ class TextManager:
         guide2 = lil_font.render("if user doesn't exist,", True, ("black"))
         guide3 = lil_font.render("it will be created automatically:", True, ("black"))
         logged_in = lil_font.render("logged in as: " + status.username, True, ("black"))
-        return text, start, guide1, guide2, guide3, logged_in
+        rules1 = lil_font.render("try to get as much energy as you can", True, ("black"))
+        rules2 = lil_font.render("to catch up on that uni work!!", True, ("black"))
+        rules3 = lil_font.render("if 3 schoolworks catch you, or your energy goes below 0", True, ("black"))
+        rules4 = lil_font.render("you missed your deadlines or fell asleep, so you lose", True, ("black"))
+        return text, start, guide1, guide2, guide3, logged_in, rules1, rules2, rules3, rules4
 
     def draw_texts(self):
-        text, start, user_guide1, user_guide2, user_guide3, logged_in = self.text_objects()
+        text, start, guide1, guide2, guide3, logged_in, rules1, rules2, rules3, rules4 = self.text_objects()
         self.screen.blit(text, (20, 20))
         #self.screen.blit(start, (300, 20))
         if not status.logged_in:
-            self.screen.blit(user_guide1, (10, 100))
-            self.screen.blit(user_guide2, (10, 120))
-            self.screen.blit(user_guide3, (10, 140))
+            self.screen.blit(guide1, (10, 100))
+            self.screen.blit(guide2, (10, 120))
+            self.screen.blit(guide3, (10, 140))
+            self.screen.blit(rules1, (426, 180))
+            self.screen.blit(rules2, (426, 200))
+            self.screen.blit(rules3, (426, 220))
+            self.screen.blit(rules4, (426, 240))
         if status.logged_in:
             self.screen.blit(start, (300, 20))
         self.screen.blit(logged_in, (1000, 10))
