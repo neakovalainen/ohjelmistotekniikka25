@@ -37,3 +37,27 @@
 - testien korjausta yms muuta hienosäätöä
 - tunnit tähän asti: 21
 
+# 10.04.25
+- 1.5h käytetty
+- ruudulla tekstikenttä, johon voi kirjottaa
+- refaktorointia
+- tunnit yhteensä: 22.5
+
+# 14.04.25
+- 5.5 käytetty
+- sql alustus
+- tietokannat toimimaan
+- käyttäjän lisäys toimii
+- käyttäjät ruudulle
+- refaktorointia
+- käyttäjän voi poistaa
+- tunnit yhteensä: 28
+
+# 15.04.24
+- 6h käytetty
+- peli voi loppua
+- pelin säännöt ruudulle
+- pisteiden laskenta ja säilöminen tietokantaan
+- pisteet näkyvät näytöltä
+- testit ja refaktorointi yms
+- tunnit yhteensä: 34
