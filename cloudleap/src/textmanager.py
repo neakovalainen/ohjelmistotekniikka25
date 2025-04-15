@@ -28,7 +28,7 @@ class TextManager:
             inactiveColour=(211, 211, 211),
             hoverColour=(200, 200, 200),
             radius=10,
-            onClick=lambda: self.logout()
+            onClick=lambda: self.logout() # pylint: disable=unnecessary-lambda
         )
         self.delete_button = Button(
             win=self.screen,
@@ -41,7 +41,7 @@ class TextManager:
             inactiveColour=(211, 211, 211),
             hoverColour=(200, 200, 200),
             radius=10,
-            onClick=lambda: self.delete_user()
+            onClick=lambda: self.delete_user() # pylint: disable=unnecessary-lambda
         )
 
     def get_users(self):
@@ -64,12 +64,12 @@ class TextManager:
         logged_in = lil_font.render("logged in as: " + status.username, True, ("black"))
         rules1 = lil_font.render("try to get as much energy as you can", True, ("black"))
         rules2 = lil_font.render("to catch up on that uni work!!", True, ("black"))
-        rules3 = lil_font.render("if 3 schoolworks catch you, or your energy goes below 0", True, ("black"))
-        rules4 = lil_font.render("you missed your deadlines or fell asleep, so you lose", True, ("black"))
+        rules3 = lil_font.render("if 3 schoolworks catch you, or your energy goes below 0", True, ("black")) # pylint: disable=line-too-long
+        rules4 = lil_font.render("you missed your deadlines or fell asleep, so you lose", True, ("black")) # pylint: disable=line-too-long
         return text, start, guide1, guide2, guide3, logged_in, rules1, rules2, rules3, rules4
 
     def draw_texts(self):
-        text, start, guide1, guide2, guide3, logged_in, rules1, rules2, rules3, rules4 = self.text_objects()
+        text, start, guide1, guide2, guide3, logged_in, rules1, rules2, rules3, rules4 = self.text_objects() # pylint: disable=line-too-long
         self.screen.blit(text, (20, 20))
         if not status.logged_in:
             self.screen.blit(guide1, (10, 100))

@@ -1,5 +1,3 @@
-from sql_connect import get_database_connection
-import sql_queries
 class UserData:
     def __init__(self, connection):
         self._connection = connection
@@ -23,7 +21,7 @@ class UserData:
             ON CONFLICT(username) DO UPDATE SET
             best_score = EXCLUDED.best_score
             ''', {"best_score":best_score, "username":username})
-        
+
         self._connection.commit()
 
     def get_username(self, username):
@@ -37,7 +35,7 @@ class UserData:
 
         user = cursor.fetchone()
         return list(user)[1]
-    
+
     def get_score(self, username):
         cursor = self._connection.cursor()
 
@@ -46,7 +44,7 @@ class UserData:
             FROM    Scores
             WHERE username = :username
             ''', {"username":username})
-        
+
         score = cursor.fetchone()
         if score:
             return list(score)[0]
@@ -96,13 +94,3 @@ class UserData:
             ''', {"username":username})
 
         self._connection.commit()
-    
-
-# connection = get_database_connection()
-# user = UserData(connection)
-# user.save_username("NENE")
-# user.update_score(1, "NENE")
-# user.update_score(3, "NENE")
-# DATA = user.get_all_scores()
-# print(DATA)
-#sql_queries.delete_tables(connection)
