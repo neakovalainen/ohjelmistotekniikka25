@@ -12,7 +12,9 @@ __cloudleap__ on yksinkertainen tasohyppelypeli, jossa käyttäjä voi kerätä 
 1.  kopioi repositorio koneellesi
 2. asenna projektin riippuvuudet \
  ``` poetry install```
- 3. käynnistä sovellus \
+3. käynnistä tietokanta \
+   ``` python3 src/build.py ```
+ 5. käynnistä sovellus \
  ``` poetry run invoke start```
 
 ## muut ohjeet
