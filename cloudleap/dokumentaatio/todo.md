@@ -36,8 +36,8 @@
 6. tulokset ruudulle, jos aikaa mahdollista pelin loppuminen kun tietyn verran pisteitä puolet done
 7. tee release (vasta kun viikon muut jutut on done)
 8. koodikatselmointi check
-9. 2-5 testiä lisää, vähintään 40% pitää olla testattuna
-10. paranna rakennetta ja laatua jos on aikaa
-11. pylint virheitä alle 5
+9. 2-5 testiä lisää, vähintään 40% pitää olla testattuna DONEE
+10. paranna rakennetta ja laatua jos on aikaa, ei ole aikaa
+11. pylint virheitä alle 5 DONEEE
 12. lisää jotain oleellista toiminnallisuutta kuvaava sekvenssikaavio
 13. päivitä sekvenssikaavio, tuntikirjanpito
