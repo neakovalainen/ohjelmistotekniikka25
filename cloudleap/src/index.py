@@ -3,8 +3,9 @@ import pygame
 from objects import Meow, PointCollector, CloudSpawner, MinusEnergy
 from userdata import UserData
 from textmanager import TextManager
-from logged_in import status
+from shared_resources import status, game_status
 from sql_connect import get_database_connection
+from game_over import GameOver
 
 # game character created by @snackanimals on twitter/X
 dirname = os.path.dirname(__file__)
@@ -47,15 +48,19 @@ class InitializeGame():
     def game_loop(self):
         while True:
             if status.logged_in:
-                if not self.game_started:
+                if not game_status.game_started:
                     self.space_check()
-
-            self.position_check(self.energy, self.enemy, self.cloudspawner, self.game_started)
-            self.moving_check(self.player)
-            self.collision_check(self.player, self.energy, self.enemy, self.game_over)
-            self.energy.update_rects(self.player, self.cloudspawner, self.enemy)
-            self.display()
-            self.event_check()
+            if not game_status.game_over:
+                self.position_check(self.energy, self.enemy, self.cloudspawner)
+                self.moving_check(self.player)
+                self.collision_check(self.player, self.energy, self.enemy)
+                self.energy.update_rects(self.player, self.cloudspawner, self.enemy)
+                self.display()
+                self.event_check()
+            else:
+                GameOver(self.screen).game_over_display(7000)
+                pygame.quit()
+                break
             pygame.display.flip()
             self.clock.tick(60)
 
@@ -88,20 +93,21 @@ class InitializeGame():
         player.backwards_check()
         player.jump_check()
 
-    def position_check(self, energy, enemy, cloudspawner, game_started):
-        energy.obtainableposition(game_started)
-        cloudspawner.cloudposition(game_started)
-        enemy.enemy_position(game_started)
+    def position_check(self, energy, enemy, cloudspawner):
+        energy.obtainableposition()
+        cloudspawner.cloudposition()
+        enemy.enemy_position()
 
-    def collision_check(self, player, energy, enemy, game_over):
+    def collision_check(self, player, energy, enemy):
         self.energy.collision_detector(player, energy)
         self.cloudspawner.cloudcollision(player)
-        self.enemy.negative_collision(player, energy, enemy, game_over)
+        self.enemy.negative_collision(player, energy, enemy)
 
     def space_check(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE]:
-            self.game_started = True
+            game_status.change_game_status()
+            #self.game_started = True
 
     def add_sprites(self):
         #self.sprites.add(self.player)

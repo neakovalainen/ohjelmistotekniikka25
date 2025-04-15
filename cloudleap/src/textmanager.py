@@ -2,7 +2,7 @@ import pygame_textinput
 import pygame
 import pygame_widgets
 from pygame_widgets.button import Button
-from logged_in import status
+from shared_resources import status
 
 class TextManager:
     def __init__(self, energy, screen, user_data):

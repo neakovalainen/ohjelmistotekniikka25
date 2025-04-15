@@ -1,6 +1,7 @@
 import os
 import random
 import pygame
+from shared_resources import game_status
 # game character created by @snackanimals on twitter/X
 dirname = os.path.dirname(__file__)
 
@@ -57,8 +58,8 @@ class PointCollector(pygame.sprite.Sprite):
         self.best_score = 0
         self.rect = pygame.Rect(self.x, self.y, self.img.get_width(), self.img.get_height())
 
-    def obtainableposition(self, game_started):
-        if game_started:
+    def obtainableposition(self):
+        if game_status.game_started:
             if self.x < 0:
                 self.x = random.randint(1280, 2000)
             else:
@@ -87,8 +88,8 @@ class CloudSpawner(pygame.sprite.Sprite):
         self.y = y
         self.rect = pygame.Rect(self.x, self.y, self.img1.get_width(), self.img1.get_height())
 
-    def cloudposition(self, game_started):
-        if game_started:
+    def cloudposition(self):
+        if game_status.game_started:
             if self.x < -500:
                 self.x = random.randint(1280, 2000)
             else:
@@ -123,23 +124,23 @@ class MinusEnergy:
         self.enemies_hit = 0
         self.rect = pygame.Rect(self.x, self.y, self.img.get_width(), self.img.get_height())
 
-    def negative_collision(self, player, energy, enemy, game_over):
+    def negative_collision(self, player, energy, enemy):
         if pygame.sprite.collide_rect(player, enemy):
             energy.points -= 1
             self.enemies_hit += 1
-            self.enemy_hit(energy, game_over)
+            self.enemy_hit(energy)
 
-    def enemy_position(self, game_started):
-        if game_started:
+    def enemy_position(self):
+        if game_status.game_started:
             if self.x < 0:
                 self.x = random.randint(1280, 1500)
             else:
                 self.x -= 4
 
-    def enemy_hit(self, energy, game_over):
+    def enemy_hit(self, energy):
         if energy.points < 0:
-            game_over = True
+            game_status.game_lost()
         if self.enemies_hit > 5:
-            game_over = True
+            game_status.game_lost()
         else:
             self.x = random.randint(1280, 2000)
