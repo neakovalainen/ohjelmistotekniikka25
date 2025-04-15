@@ -31,9 +31,9 @@
 1. selvitä miten text input ruudulle DONE
 2. sql initialization DONE
 3.mahdollista kirjautuminen DONEEE
-4. tulosten update ku peli loppuu
-5. tulokset tietokantaan
-6. tulokset ruudulle, jos aikaa mahdollista pelin loppuminen kun tietyn verran pisteitä
+4. tulosten update ku peli loppuu DONEEE
+5. tulokset tietokantaan DONEEE
+6. tulokset ruudulle, jos aikaa mahdollista pelin loppuminen kun tietyn verran pisteitä puolet done
 7. tee release (vasta kun viikon muut jutut on done)
 8. koodikatselmointi check
 9. 2-5 testiä lisää, vähintään 40% pitää olla testattuna
