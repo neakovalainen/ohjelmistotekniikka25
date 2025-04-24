@@ -16,6 +16,7 @@ class GameStatus():
     def __init__(self):
         self.game_over = False
         self.game_started = False
+        self.energy_level = 4
 
     def game_lost(self):
         self.game_over = True
@@ -28,3 +29,4 @@ class GameStatus():
 
 status = LogInManager()
 game_status = GameStatus()
+

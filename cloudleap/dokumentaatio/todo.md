@@ -41,3 +41,20 @@
 11. pylint virheitä alle 5 DONEEE
 12. lisää jotain oleellista toiminnallisuutta kuvaava sekvenssikaavio
 13. päivitä sekvenssikaavio, tuntikirjanpito
+
+# viikko 6
+1. koodikatselmointi DONEE
+2. nopeuta esteet DONE, onkohan ny hyvä hmmm
+3. peli loppuu kun tietty määrä pisteitä
+4. useampi vastaantuleva objekti
+5. energiajuoma pilven päälle
+6. pilven päältä mahdollisuus hypätä
+7. tässä kohtaa jos muut valmiit ennen tiistaita: uloskirjautuminen lopettaa pelin
+8. tarkista pylint
+9. lisää testejä
+10. koodin laadun parantaminen jos aikaa
+11. puolille luokista, metodeista, funktioista docstring dokumentaatio
+12. 1-2 sivun arkkitehtuurikuvaus
+13. noin sivun pitunen käyttöohje jee
+14. changelog update
+15. tuntikirjanpito update

@@ -63,7 +63,7 @@ class PointCollector(pygame.sprite.Sprite):
             if self.x < 0:
                 self.x = random.randint(1280, 2000)
             else:
-                self.x -= 4
+                self.x -= game_status.energy_level
 
     def energy_consumed(self):
         self.x += random.randint(1280, 2000)
@@ -72,6 +72,8 @@ class PointCollector(pygame.sprite.Sprite):
         if pygame.sprite.collide_rect(player, energy):
             self.points += 1
             self.energy_consumed()
+            if self.points % 3 == 0:
+                game_status.energy_level += 1
 
     def update_rects(self, meow, cloud, enemy):
         self.rect.topleft = (self.x, self.y)
@@ -93,7 +95,7 @@ class CloudSpawner(pygame.sprite.Sprite):
             if self.x < -500:
                 self.x = random.randint(1280, 2000)
             else:
-                self.x -= 4
+                self.x -= game_status.energy_level
 
     def cloudcollision(self, player):
         player_next_pos = player.rect.bottom + player.jump_force
@@ -129,13 +131,14 @@ class MinusEnergy:
             energy.points -= 1
             self.enemies_hit += 1
             self.enemy_hit(energy)
+            game_status.energy_level -= 0.5
 
     def enemy_position(self):
         if game_status.game_started:
             if self.x < 0:
                 self.x = random.randint(1280, 1500)
             else:
-                self.x -= 4
+                self.x -= game_status.energy_level
 
     def enemy_hit(self, energy):
         if energy.points < 0:

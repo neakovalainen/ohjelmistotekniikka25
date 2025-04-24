@@ -4,14 +4,16 @@ import pygame_widgets
 from pygame_widgets.button import Button
 from shared_resources import status
 
+FONT = "src/assets/unifont-16.0.02.otf"
+
 class TextManager:
     def __init__(self, energy, screen, user_data):
         self.textmanager = pygame_textinput.TextInputManager()
         self.textinput = pygame_textinput.TextInputVisualizer(manager=self.textmanager)
         self.textinput.cursor_width = 1
         self.textinput.cursor_blink_interval = 500
-        self.textinput.font_object = pygame.font.Font("src/assets/unifont-16.0.02.otf", 15)
-        self.font = pygame.font.Font("src/assets/unifont-16.0.02.otf", 30)
+        self.textinput.font_object = pygame.font.Font(FONT, 15)
+        self.font = pygame.font.Font(FONT, 30)
         self.energy = energy
         #self.username = ""
         self.screen = screen
@@ -45,7 +47,7 @@ class TextManager:
         )
 
     def get_users(self):
-        lil_font = pygame.font.Font("src/assets/unifont-16.0.02.otf", 15)
+        lil_font = pygame.font.Font(FONT, 15)
         y_coordinate = 75
         for _, score, user in self.user_data.get_all_scores():
             user_rendered = lil_font.render(str(user), True, ("Black"))
@@ -55,7 +57,7 @@ class TextManager:
             y_coordinate += 15
 
     def text_objects(self):
-        lil_font = pygame.font.Font("src/assets/unifont-16.0.02.otf", 15)
+        lil_font = pygame.font.Font(FONT, 15)
         text = self.font.render("current energy:" + str(self.energy.points), True, ("black"))
         start = self.font.render("start game by pressing space (づ ◕‿◕ )づ", True, ("black"))
         guide1 = lil_font.render("write username below and press enter", True, ("black"))
