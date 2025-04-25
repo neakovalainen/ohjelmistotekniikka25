@@ -29,4 +29,3 @@ class GameStatus():
 
 status = LogInManager()
 game_status = GameStatus()
-

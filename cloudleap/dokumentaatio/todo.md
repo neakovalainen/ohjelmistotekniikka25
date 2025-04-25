@@ -45,7 +45,7 @@
 # viikko 6
 1. koodikatselmointi DONEE
 2. nopeuta esteet DONE, onkohan ny hyvä hmmm
-3. peli loppuu kun tietty määrä pisteitä
+3. peli loppuu kun tietty määrä pisteitä (nopeutettu instead)
 4. useampi vastaantuleva objekti
 5. energiajuoma pilven päälle
 6. pilven päältä mahdollisuus hypätä

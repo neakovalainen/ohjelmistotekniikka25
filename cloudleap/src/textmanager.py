@@ -67,7 +67,7 @@ class TextManager:
         rules1 = lil_font.render("try to get as much energy as you can", True, ("black"))
         rules2 = lil_font.render("to catch up on that uni work!!", True, ("black"))
         rules3 = lil_font.render("if 3 schoolworks catch you, or your energy goes below 0", True, ("black")) # pylint: disable=line-too-long
-        rules4 = lil_font.render("you missed your deadlines or fell asleep, so you lose", True, ("black")) # pylint: disable=line-too-long
+        rules4 = lil_font.render("you fell asleep and missed your deadlines, so you lose", True, ("black")) # pylint: disable=line-too-long
         return text, start, guide1, guide2, guide3, logged_in, rules1, rules2, rules3, rules4
 
     def draw_texts(self):

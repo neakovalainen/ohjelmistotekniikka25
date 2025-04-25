@@ -16,18 +16,14 @@ class InitializeGame():
     def __init__(self):
         pygame.init()
         self.player = Meow(550, GROUND_HEIGHT)
-        self.energy = PointCollector(1700, 600)
+        self.energy = PointCollector()
         self.cloudspawner = CloudSpawner(1500, 500)
         self.enemy = MinusEnergy(3000, 600)
         self.screen = pygame.display.set_mode((1280, 720))
         self.clock = pygame.time.Clock()
-        self.font = pygame.font.Font("src/assets/unifont-16.0.02.otf", 30)
-        self.sprites = pygame.sprite.Group() # group of all sprites, keeps track of collision
         self.user_data = UserData(get_database_connection())
         self.textmanager = TextManager(self.energy, self.screen, self.user_data)
-        self.game_started = False
-        self.game_over = False
-        self.add_sprites()
+
         self.game_loop()
 
     def display(self):
@@ -35,7 +31,9 @@ class InitializeGame():
         #pygame.draw.rect(self.screen, "black", self.player.rect) # rect for debugging
         #pygame.draw.rect(self.screen, "red", self.cloudspawner.rect)
         self.screen.blit(self.player.meow, (self.player.x, self.player.y))
-        self.screen.blit(self.energy.img, (self.energy.x, self.energy.y))
+        for energy in self.energy.all_energies:
+            #print(energy[0], energy[1])
+            self.screen.blit(self.energy.img, (energy[0], energy[1]))
         self.screen.blit(self.cloudspawner.img1, (self.cloudspawner.x, self.cloudspawner.y))
         self.screen.blit(self.enemy.img, (self.enemy.x, self.enemy.y))
         if not status.logged_in:
@@ -52,8 +50,8 @@ class InitializeGame():
             if not game_status.game_over:
                 self.position_check(self.energy, self.enemy, self.cloudspawner)
                 self.moving_check(self.player)
-                self.collision_check(self.player, self.energy, self.enemy)
                 self.energy.update_rects(self.player, self.cloudspawner, self.enemy)
+                self.collision_check(self.player, self.energy, self.enemy)
                 self.display()
                 self.event_check()
             else:
@@ -109,12 +107,6 @@ class InitializeGame():
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE]:
             game_status.change_game_status()
-
-    def add_sprites(self):
-        #self.sprites.add(self.player)
-        #self.sprites.add(self.energy)
-        #self.sprites.add(self.energy)
-        pass
 
 if __name__=="__main__":
     InitializeGame()

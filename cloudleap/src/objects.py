@@ -7,11 +7,11 @@ dirname = os.path.dirname(__file__)
 
 GROUND_HEIGHT = 500
 
-class Meow(pygame.sprite.Sprite): # player location, movement etc.
+class Meow(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
         self.image = pygame.image.load('src/assets/meowmeow.png')
-        self.meow = pygame.transform.scale(self.image, (105, 142)) # right size image
+        self.meow = pygame.transform.scale(self.image, (105, 142))
         self.x = x
         self.y = y
         self.jumping = False
@@ -48,35 +48,59 @@ class Meow(pygame.sprite.Sprite): # player location, movement etc.
 
 
 class PointCollector(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self):
         super().__init__()
         self.image = pygame.image.load('src/assets/energy.png')
         self.img = pygame.transform.scale(self.image, (13, 38))
-        self.x = x
-        self.y = y
+        self.width = self.img.get_width()
+        self.height = self.img.get_height()
         self.points = 0
         self.best_score = 0
-        self.rect = pygame.Rect(self.x, self.y, self.img.get_width(), self.img.get_height())
+        self.all_energies = []
+        self.energy_rects = []
+        self.start_positions()
+        self.add_rects()
+
+    def start_positions(self):
+        for _ in range(5):
+            x = random.randint(1280, 5000)
+            y = 600
+            self.all_energies.append((x, y))
+
+    def add_rects(self):
+        for energy in self.all_energies:
+            self.energy_rects.append(pygame.Rect(energy[0], energy[1], self.width, self.height))
 
     def obtainableposition(self):
         if game_status.game_started:
-            if self.x < 0:
-                self.x = random.randint(1280, 2000)
-            else:
-                self.x -= game_status.energy_level
+            for index, energy in enumerate(self.all_energies):
+                x = energy[0]
+                if energy[0] < 0:
+                    x = random.randint(1280, 5000)
+                    self.all_energies[index] = (x, energy[1])
+                else:
+                    x -= game_status.energy_level
+                    self.all_energies[index] = (x, energy[1])
 
-    def energy_consumed(self):
-        self.x += random.randint(1280, 2000)
+    def energy_consumed(self, energy):
+        x = energy[0]
+        x += random.randint(1280, 2000)
+        return x, energy[1]
 
     def collision_detector(self, player, energy):
-        if pygame.sprite.collide_rect(player, energy):
-            self.points += 1
-            self.energy_consumed()
-            if self.points % 3 == 0:
-                game_status.energy_level += 1
+        for rect in energy.energy_rects:
+            if rect.colliderect(player.rect):
+                possible_collision = [(x, y) for (x, y) in energy.all_energies if rect.x <= x <= rect.x + rect.width]
+                if len(possible_collision):
+                    index = energy.all_energies.index(possible_collision[0])
+                    energy.all_energies[index] = self.energy_consumed(energy.all_energies[index])
+                    self.points += 1
+                    game_status.energy_level += 0.25
 
     def update_rects(self, meow, cloud, enemy):
-        self.rect.topleft = (self.x, self.y)
+        for index, energy in enumerate(self.all_energies):
+            self.energy_rects[index] = pygame.Rect(energy[0], energy[1], self.width, self.height)
+
         meow.rect.topleft = (meow.x, meow.y)
         cloud.rect.topleft = (cloud.x, cloud.y)
         enemy.rect.topleft = (enemy.x, enemy.y)
