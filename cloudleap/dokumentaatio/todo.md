@@ -50,7 +50,7 @@
 5. ~~energiajuoma pilven päälle~~
 6. ~~pilven päältä mahdollisuus hypätä DONE~~
 7. ~~tässä kohtaa jos muut valmiit ennen tiistaita: uloskirjautuminen lopettaa pelin~~
-8. tarkista pylint
+8. ~~tarkista pylint~~
 9. lisää testejä
 10. koodin laadun parantaminen jos aikaa
 11. puolille luokista, metodeista, funktioista docstring dokumentaatio

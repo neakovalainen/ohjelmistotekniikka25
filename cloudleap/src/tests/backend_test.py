@@ -5,7 +5,7 @@ from shared_resources import game_status, LogInManager, GameStatus
 
 class TestBackend(unittest.TestCase):
     def setUp(self):
-        self.player = Meow(500, GROUND_HEIGHT)
+        self.player = Meow()
         self.game = InitializeGame
         self.energy = PointCollector()
         self.cloud = CloudSpawner()
@@ -15,7 +15,7 @@ class TestBackend(unittest.TestCase):
         self.assertEqual((self.player.x, self.player.y), (500, GROUND_HEIGHT))
 
     def test_points_increased_when_collision_happens(self):
-        self.energy.all_energies = [(500, 500)]
+        self.energy.all_energies = [(500, GROUND_HEIGHT)]
         self.energy.add_rects()
         self.energy.collision_detector(self.player, self.energy)
         self.assertEqual(self.energy.points, 1)
@@ -32,12 +32,12 @@ class TestBackend(unittest.TestCase):
 
     def test_energy_drink_spawns_outside_screen_if_disappeared_from_left(self):
         self.energy.all_energies = [(-100, 600)]
-        self.energy.obtainableposition()
+        self.energy.obtainableposition(self.cloud)
         self.assertTrue(1280 <= self.energy.all_energies[0][0] <= 5000)
 
     def test_energy_drink_moves_left_while_on_screen(self):
         self.energy.all_energies = [(500, 500)]
-        self.energy.obtainableposition()
+        self.energy.obtainableposition(self.cloud)
         self.assertEqual(self.energy.all_energies[0][0], 496)
 
     def test_player_jumps_y_decreases(self):
@@ -94,5 +94,5 @@ class TestBackend(unittest.TestCase):
         self.assertEqual(status.game_over, True)
 
     def test_enemy_position_initialized_correctly(self):
-        enemy = MinusEnergy(500, GROUND_HEIGHT)
-        self.assertEqual((enemy.x, enemy.y), (500, GROUND_HEIGHT))
+        enemy = MinusEnergy()
+        self.assertEqual((enemy.x, enemy.y), (3000, 600))

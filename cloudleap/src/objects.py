@@ -22,13 +22,13 @@ class Meow(pygame.sprite.Sprite):
         self.start_position()
 
     def start_position(self):
-        self.x = 550
+        self.x = 500
         self.y = GROUND_HEIGHT
+        self.rect = pygame.Rect(self.x, self.y, self.meow.get_width(), self.meow.get_height())
 
     def reset_jumping(self):
         self.jumping = False
         self.jump_force = 20
-
 
     def jump_check(self):
         if not self.jumping:
