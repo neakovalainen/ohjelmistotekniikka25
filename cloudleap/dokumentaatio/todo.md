@@ -45,11 +45,11 @@
 # viikko 6
 1. ~~koodikatselmointi~~
 2. ~~nopeuta esteet~~
-3. peli loppuu kun tietty määrä pisteitä (nopeutettu instead)
+3. ~~peli loppuu kun tietty määrä pisteitä (nopeutettu instead)~~
 4. ~~useampi vastaantuleva objekti on mut paljon bugeja pilvillä~~
-5. energiajuoma pilven päälle
-6. pilven päältä mahdollisuus hypätä DONE
-7. tässä kohtaa jos muut valmiit ennen tiistaita: uloskirjautuminen lopettaa pelin
+5. ~~energiajuoma pilven päälle~~
+6. ~~pilven päältä mahdollisuus hypätä DONE~~
+7. ~~tässä kohtaa jos muut valmiit ennen tiistaita: uloskirjautuminen lopettaa pelin~~
 8. tarkista pylint
 9. lisää testejä
 10. koodin laadun parantaminen jos aikaa

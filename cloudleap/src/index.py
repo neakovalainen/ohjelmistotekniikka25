@@ -15,15 +15,16 @@ GROUND_HEIGHT = 500
 class InitializeGame():
     def __init__(self):
         pygame.init()
-        self.player = Meow(550, GROUND_HEIGHT)
+        self.player = Meow()
         self.energy = PointCollector()
         self.cloud = CloudSpawner()
-        self.enemy = MinusEnergy(3000, 600)
+        self.enemy = MinusEnergy()
         self.screen = pygame.display.set_mode((1280, 720))
         self.clock = pygame.time.Clock()
-        self.user_data = UserData(get_database_connection())
-        self.textmanager = TextManager(self.energy, self.screen, self.user_data)
-
+        self.data = UserData(get_database_connection())
+        self.textmanager = TextManager(
+            self.player, self.energy, self.cloud, self.enemy, self.screen, self.data)
+        self.running = True
         self.game_loop()
 
     def display(self):
@@ -41,7 +42,7 @@ class InitializeGame():
         pygame.display.set_caption("cloudleap")
 
     def game_loop(self):
-        while True:
+        while self.running:
             if status.logged_in:
                 if not game_status.game_started:
                     self.space_check()
@@ -52,12 +53,12 @@ class InitializeGame():
                 self.collision_check(self.player, self.energy, self.enemy)
                 self.display()
                 self.event_check()
+                if not self.running:
+                    break
             else:
-                GameOver(self.screen).game_over_display(7000)
+                GameOver(self.screen, self.energy.points).game_over_display(8000)
                 self.energy.best_score = self.energy.points
-                if self.user_data.get_score(status.username) < self.energy.best_score:
-                    self.user_data.update_score(self.energy.best_score, status.username)
-                pygame.quit()
+                self.textmanager.update_scores()
                 break
             pygame.display.flip()
             self.clock.tick(60)
@@ -66,21 +67,23 @@ class InitializeGame():
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.QUIT:
+                self.running = False
                 pygame.quit()
+                return
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
                 status.login()
                 username = self.textmanager.textinput.value
                 status.current_user(username)
                 if not self.username_check(username):
-                    self.user_data.save_username(username)
-                self.user_data.get_all_scores()
+                    self.data.save_username(username)
+                self.data.get_all_scores()
 
         if not status.logged_in:
             self.textmanager.textinput.update(events)
         self.textmanager.button_update(events)
 
     def username_check(self, username):
-        all_users = self.user_data.get_all_users()
+        all_users = self.data.get_all_users()
         for _, user in all_users:
             if username == user:
                 return True
@@ -92,7 +95,7 @@ class InitializeGame():
         player.jump_check()
 
     def position_check(self, energy, enemy, cloud):
-        energy.obtainableposition()
+        energy.obtainableposition(cloud)
         cloud.cloudposition()
         enemy.enemy_position()
 

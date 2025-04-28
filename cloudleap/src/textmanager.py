@@ -2,19 +2,22 @@ import pygame_textinput
 import pygame
 import pygame_widgets
 from pygame_widgets.button import Button
-from shared_resources import status
+from shared_resources import status, game_status
 
 FONT = "src/assets/unifont-16.0.02.otf"
 
 class TextManager:
-    def __init__(self, energy, screen, user_data):
+    def __init__(self, player, energy, cloud, enemy, screen, user_data):
         self.textmanager = pygame_textinput.TextInputManager()
         self.textinput = pygame_textinput.TextInputVisualizer(manager=self.textmanager)
         self.textinput.cursor_width = 1
         self.textinput.cursor_blink_interval = 500
         self.textinput.font_object = pygame.font.Font(FONT, 15)
         self.font = pygame.font.Font(FONT, 30)
+        self.player = player
         self.energy = energy
+        self.enemy = enemy
+        self.cloud = cloud
         self.screen = screen
         self.user_data = user_data
         self.logout_button = Button(
@@ -28,7 +31,7 @@ class TextManager:
             inactiveColour=(211, 211, 211),
             hoverColour=(200, 200, 200),
             radius=10,
-            onClick=lambda: self.logout() # pylint: disable=unnecessary-lambda
+            onClick=lambda: self.logout(False) # pylint: disable=unnecessary-lambda
         )
         self.delete_button = Button(
             win=self.screen,
@@ -87,12 +90,26 @@ class TextManager:
     def button_update(self, events):
         pygame_widgets.update(events)
 
-    def logout(self):
+    def update_scores(self):
+        if self.user_data.get_score(status.username) < self.energy.best_score:
+            self.user_data.update_score(self.energy.best_score, status.username)
+
+    def logout(self, deletion):
+        if not deletion:
+            self.update_scores()
+            game_status.change_game_status()
         status.logout()
         status.current_user("")
         self.textinput.value = ""
+        self.energy.start_positions()
+        self.energy.add_rects()
+        self.energy.reset_stats()
+        self.cloud.start_positions()
+        self.cloud.add_rects()
+        self.player.start_position()
+        self.enemy.start_position()
 
     def delete_user(self):
         self.user_data.delete_user(status.username)
         self.user_data.delete_score(status.username)
-        self.logout()
+        self.logout(True)
