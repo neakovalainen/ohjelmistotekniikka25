@@ -15,10 +15,8 @@ class TextManager:
         self.textinput.font_object = pygame.font.Font(FONT, 15)
         self.font = pygame.font.Font(FONT, 30)
         self.energy = energy
-        #self.username = ""
         self.screen = screen
         self.user_data = user_data
-        #self.logged_in = status.logged_in
         self.logout_button = Button(
             win=self.screen,
             x=1000,

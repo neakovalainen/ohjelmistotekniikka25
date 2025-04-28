@@ -53,7 +53,7 @@
 - käyttäjän voi poistaa
 - tunnit yhteensä: 28
 
-# 15.04.24
+# 15.04.25
 - 6h käytetty
 - peli voi loppua
 - pelin säännöt ruudulle
@@ -61,3 +61,11 @@
 - pisteet näkyvät näytöltä
 - testit ja refaktorointi yms
 - tunnit yhteensä: 34
+
+# 24.04.25
+- 3h käytetty
+- nopeus muuttuu energiaa kerätessä
+- debuggausta
+- edellisen yhden energiajuoman sisään aloitin tekemään niistä listaa
+
+# 25.04.25

@@ -1,9 +1,9 @@
 # viikko 3
 
-1. erittele luokkiin meow DONE 
-2. erittele luokkiin pointcollector DONEEEE
-3. selvitä super?? DONEEEE
-4. osuu yhteen, juoma katoaa DONEEEE (ei katoo, mut tiedän et osuuu)
+1. ~~erittele luokkiin meow DONE~~ 
+2. ~~erittele luokkiin pointcollector~~
+3. ~~selvitä super??~~
+4. ~~osuu yhteen, juoma katoaa~~
 5. pisteet/energiataso +1 (toimii, tho kosk juoma ei katoo, niin kasvaa loputtomasti) 
 6. tee yks testi! DONEEE, tein kaks
 7. testikattavuusraportin generointi
@@ -43,12 +43,12 @@
 13. päivitä sekvenssikaavio, tuntikirjanpito
 
 # viikko 6
-1. koodikatselmointi DONEE
-2. nopeuta esteet DONE, onkohan ny hyvä hmmm
+1. ~~koodikatselmointi~~
+2. ~~nopeuta esteet~~
 3. peli loppuu kun tietty määrä pisteitä (nopeutettu instead)
-4. useampi vastaantuleva objekti
+4. ~~useampi vastaantuleva objekti on mut paljon bugeja pilvillä~~
 5. energiajuoma pilven päälle
-6. pilven päältä mahdollisuus hypätä
+6. pilven päältä mahdollisuus hypätä DONE
 7. tässä kohtaa jos muut valmiit ennen tiistaita: uloskirjautuminen lopettaa pelin
 8. tarkista pylint
 9. lisää testejä
