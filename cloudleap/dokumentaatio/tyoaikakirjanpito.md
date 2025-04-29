@@ -67,5 +67,27 @@
 - nopeus muuttuu energiaa kerätessä
 - debuggausta
 - edellisen yhden energiajuoman sisään aloitin tekemään niistä listaa
+- tunnit yhteensä: 37
 
 # 25.04.25
+- 3h
+- energiajuomia on nyt useita
+- debuggausta
+- aloitin tekemään pilvistä myös listaa
+- tunnit yhteensä: 40
+
+# 28.04.25
+- 6h
+- pilvet toimivat
+- debuggausta
+- peli palaa aloitusruutuun, kun kirjaudutaan ulos
+- pylint virheet, testien korjailu ja uusien lisäys
+- tunnit yhteensä: 46
+
+# 29.04.25
+- 4h
+- arkkitehtuurikuvaus
+- käyttöhjeet
+- testien kirjoittelua
+- docstring dokumentaation aloitus
+- tunnit yhteensä: 50

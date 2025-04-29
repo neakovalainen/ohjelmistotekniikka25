@@ -21,3 +21,8 @@
 - peli päättyy kun on osuttu kolmeen esteeseen tai kun energiataso menee miinukselle
 - kun peli päättynyt, ruudulle tulee siitä kertova huomautus ja ikkuna sulkeutuu automaattisesti 
 - pelaaja voi kirjautua ulos ja poistaa käyttäjänsä
+
+# viikko 6
+- pilviä ja energiajuomia voi nyt olla ruudulla useammat kuin vain yksi kerrallaan
+- pelin tahti nopenee sitä myötä, mitä energiajuomia kerätään
+- käyttäjän ulos kirjautuessa peli ei jatku, vaan palaa aloitusruutuun
