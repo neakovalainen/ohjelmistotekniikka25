@@ -3,10 +3,11 @@ __cloudleap__ on yksinkertainen tasohyppelypeli, jossa käyttäjä voi kerätä 
 
 ## Dokumentaatio
 
-[vaatimusmäärittely](https://github.com/neakovalainen/ohjelmistotekniikka25/tree/main/cloudleap/dokumentaatio/vaatimusmaarittely.md) \
-[työaikakirjanpito](https://github.com/neakovalainen/ohjelmistotekniikka25/tree/main/cloudleap/dokumentaatio/tyoaikakirjanpito.md) \
-[arkkitehtuuri](https://github.com/neakovalainen/ohjelmistotekniikka25/tree/main/cloudleap/dokumentaatio/arkkitehtuuri.md) \
-[changelog](https://github.com/neakovalainen/ohjelmistotekniikka25/tree/main/cloudleap/dokumentaatio/changelog.md)
+- [vaatimusmäärittely](https://github.com/neakovalainen/ohjelmistotekniikka25/tree/main/cloudleap/dokumentaatio/vaatimusmaarittely.md)
+- [työaikakirjanpito](https://github.com/neakovalainen/ohjelmistotekniikka25/tree/main/cloudleap/dokumentaatio/tyoaikakirjanpito.md)
+- [arkkitehtuuri](https://github.com/neakovalainen/ohjelmistotekniikka25/tree/main/cloudleap/dokumentaatio/arkkitehtuuri.md)
+- [changelog](https://github.com/neakovalainen/ohjelmistotekniikka25/tree/main/cloudleap/dokumentaatio/changelog.md)
+- [käyttöohjeet](https://github.com/neakovalainen/ohjelmistotekniikka25/blob/main/cloudleap/dokumentaatio/kayttoohje.md)
 
 ## käynnistysohjeet
 1.  kopioi repositorio koneellesi
