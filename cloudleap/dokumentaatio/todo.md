@@ -54,7 +54,7 @@
 9. ~~lisää testejä~~
 10. koodin laadun parantaminen jos aikaa
 11. ~~puolille luokista, metodeista, funktioista docstring dokumentaatio~~
-12. 1-2 sivun arkkitehtuurikuvaus
+12. ~~1-2 sivun arkkitehtuurikuvaus~~
 13. noin sivun pitunen käyttöohje jee
 14. changelog update
 15. tuntikirjanpito update
