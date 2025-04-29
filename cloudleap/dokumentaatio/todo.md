@@ -51,9 +51,9 @@
 6. ~~pilven päältä mahdollisuus hypätä DONE~~
 7. ~~tässä kohtaa jos muut valmiit ennen tiistaita: uloskirjautuminen lopettaa pelin~~
 8. ~~tarkista pylint~~
-9. lisää testejä
+9. ~~lisää testejä~~
 10. koodin laadun parantaminen jos aikaa
-11. puolille luokista, metodeista, funktioista docstring dokumentaatio
+11. ~~puolille luokista, metodeista, funktioista docstring dokumentaatio~~
 12. 1-2 sivun arkkitehtuurikuvaus
 13. noin sivun pitunen käyttöohje jee
 14. changelog update
