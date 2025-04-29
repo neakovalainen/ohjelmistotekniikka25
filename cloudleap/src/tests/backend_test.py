@@ -1,14 +1,17 @@
 import unittest
+
+import pygame.tests
 from index import InitializeGame, GROUND_HEIGHT
 from objects import Meow, PointCollector, CloudSpawner, MinusEnergy
 from shared_resources import game_status, LogInManager, GameStatus
+import pygame
 
 class TestBackend(unittest.TestCase):
     def setUp(self):
         self.player = Meow()
-        self.game = InitializeGame
         self.energy = PointCollector()
         self.cloud = CloudSpawner()
+        self.enemy = MinusEnergy()
         game_status.game_started = True
 
     def test_player_x_coordinate_initialized_correctly(self):
@@ -96,3 +99,38 @@ class TestBackend(unittest.TestCase):
     def test_enemy_position_initialized_correctly(self):
         enemy = MinusEnergy()
         self.assertEqual((enemy.x, enemy.y), (3000, 600))
+
+    def test_start_falling_jumping_True(self):
+        self.player.start_falling()
+        self.assertEqual(self.player.jumping, True)
+    
+    def test_start_falling_jump_force_to_zero(self):
+        self.player.start_falling()
+        self.assertEqual(self.player.jump_force, 0)
+
+    def test_touching_cloud_into_False_if_jumping(self):
+        self.player.touching_cloud = True
+        self.player.jumping = True
+        self.player.jump_check()
+        self.assertEqual(self.player.touching_cloud, False)
+
+    def test_energy_reset(self):
+        self.energy.points = 10
+        self.energy.reset_stats()
+        self.assertEqual(self.energy.points, 0)
+
+    def test_reset_energy_positions(self):
+        self.energy.all_energies = ((1,2), (3, 4))
+        self.energy.start_positions()
+        self.assertEqual(len(self.energy.all_energies), 5)
+
+    def test_reset_cloud_positions(self):
+        self.cloud.clouds = ((1,2), (2, 3))
+        self.cloud.start_positions()
+        self.assertEqual(len(self.cloud.clouds), 3)
+    
+    def test_enemy_new_position_if_disappeared_from_left(self):
+        self.enemy.x = -100
+        self.enemy.y = 500
+        self.enemy.enemy_position()
+        self.assertTrue(1280 <= self.enemy.x <= 3000)
