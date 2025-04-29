@@ -1,6 +1,9 @@
 import pygame
 
 class GameOver():
+    """
+        Luokka, joka huolehtii pelin lopetusnäytön piirtämisestä
+    """
     def __init__(self, screen, points):
         self.screen = screen
         self.points = points
@@ -11,6 +14,9 @@ class GameOver():
 
 
     def texts(self):
+        """
+            Lopetusruudulle piirrettävät tekstit
+        """
         big_text = self.big.render("GAME OVER ( •̀ᴗ•́ )و ̑̑", True, self.red)
         points = self.big.render("energy at the end: " + str(self.points), True, self.red)
         small_text = self.small.render("open new game to try again~", True, self.red)

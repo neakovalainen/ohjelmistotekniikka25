@@ -13,6 +13,10 @@ dirname = os.path.dirname(__file__)
 GROUND_HEIGHT = 500
 
 class InitializeGame():
+    """ 
+        Luokka, jonka avulla peli käynnistetään ja suljetaan ja, joka pitää huolta 
+        sen pyörittämisestä
+    """
     def __init__(self):
         pygame.init()
         self.player = Meow()
@@ -28,6 +32,9 @@ class InitializeGame():
         self.game_loop()
 
     def display(self):
+        """
+            huolehtii objektien ja taustan piirätmisestä näytölle
+        """
         self.screen.fill("white")
         self.screen.blit(self.player.meow, (self.player.x, self.player.y))
         for energy in self.energy.all_energies:
@@ -42,6 +49,9 @@ class InitializeGame():
         pygame.display.set_caption("cloudleap")
 
     def game_loop(self):
+        """
+            hoitaa pelin pyörittämisen niin kauan kun self.running = True
+        """
         while self.running:
             if status.logged_in:
                 if not game_status.game_started:
@@ -64,6 +74,10 @@ class InitializeGame():
             self.clock.tick(60)
 
     def event_check(self):
+        """
+            Tarkistaa tapahtumat, joiden perusteella uusi käyttäjä tallennetaan,
+            tulokset haetaan tietokannasta ja peli-ikkuna suljetaan
+        """
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.QUIT:
@@ -83,8 +97,15 @@ class InitializeGame():
         self.textmanager.button_update(events)
 
     def username_check(self, username):
+        """
+            Hakee tietokannasta tiedon, onko käyttäjää olemassa
+            Palauttaa True jos on, muuten False
+
+            Args:
+            username: käyttäjänimi jonka olemassaolo halutaan varmistaa
+        """
         all_users = self.data.get_all_users()
-        for _, user in all_users:
+        for user in all_users:
             if username == user:
                 return True
         return False
@@ -105,6 +126,9 @@ class InitializeGame():
         self.enemy.negative_collision(player, energy, enemy)
 
     def space_check(self):
+        """
+            Peli aloitetaan painamalla space, tämä tarkistaa sen
+        """
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE]:
             game_status.change_game_status()

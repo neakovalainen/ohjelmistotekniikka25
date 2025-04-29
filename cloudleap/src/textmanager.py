@@ -7,6 +7,9 @@ from shared_resources import status, game_status
 FONT = "src/assets/unifont-16.0.02.otf"
 
 class TextManager:
+    """
+        Luokka, joka huolehtii tekstien, nappien ja inputkentän piirtämisestä
+    """
     def __init__(self, player, energy, cloud, enemy, screen, user_data):
         self.textmanager = pygame_textinput.TextInputManager()
         self.textinput = pygame_textinput.TextInputVisualizer(manager=self.textmanager)
@@ -48,6 +51,9 @@ class TextManager:
         )
 
     def get_users(self):
+        """
+            Metodi, joka hoitaa parhaiden tulosten hakemisen ja piirtämisen
+        """
         lil_font = pygame.font.Font(FONT, 15)
         y_coordinate = 75
         for _, score, user in self.user_data.get_all_scores():
@@ -58,6 +64,9 @@ class TextManager:
             y_coordinate += 15
 
     def text_objects(self):
+        """
+            Ruudulle piirrettävien tekstien määrittely
+        """
         lil_font = pygame.font.Font(FONT, 15)
         text = self.font.render("current energy:" + str(self.energy.points), True, ("black"))
         start = self.font.render("start game by pressing space (づ ◕‿◕ )づ", True, ("black"))
@@ -95,6 +104,10 @@ class TextManager:
             self.user_data.update_score(self.energy.best_score, status.username)
 
     def logout(self, deletion):
+        """
+            Metodi, joka huolehtii siitä, että uloskirjautuessa
+            kaikki objektit nollataan
+        """
         if not deletion:
             self.update_scores()
             game_status.change_game_status()

@@ -8,6 +8,10 @@ dirname = os.path.dirname(__file__)
 GROUND_HEIGHT = 500
 
 class Meow(pygame.sprite.Sprite):
+    """
+        Luokka, joka sisältää käytännössä kaiken tiedon pelaajasta ja
+        hoitaa sen liikkumista
+    """
     def __init__(self):
         super().__init__()
         self.image = pygame.image.load('src/assets/meowmeow.png')
@@ -22,6 +26,9 @@ class Meow(pygame.sprite.Sprite):
         self.start_position()
 
     def start_position(self):
+        """
+            Pelaajan sijainti pelin alkaessa
+        """
         self.x = 500
         self.y = GROUND_HEIGHT
         self.rect = pygame.Rect(self.x, self.y, self.meow.get_width(), self.meow.get_height())
@@ -31,6 +38,11 @@ class Meow(pygame.sprite.Sprite):
         self.jump_force = 20
 
     def jump_check(self):
+        """
+            Metodi hyppäämisen toteuttamiselle
+            seuraa hyppääkö pelaaja ja jos on hypännyt pitää huolen
+            sen laskeutumisesta
+        """
         if not self.jumping:
             keys = pygame.key.get_pressed()
             if keys[pygame.K_SPACE] or keys[pygame.K_UP]:
@@ -48,6 +60,9 @@ class Meow(pygame.sprite.Sprite):
                 self.touching_cloud = False
 
     def is_falling(self):
+        """
+            Tarkistus onko pelaaja putoamassa
+        """
         return self.jump_force < 0
 
     def start_falling(self):
@@ -66,6 +81,10 @@ class Meow(pygame.sprite.Sprite):
 
 
 class PointCollector(pygame.sprite.Sprite):
+    """
+        Luokka, joka sisältää tiedot liittyen pisteiden keruuseen ja 
+        energiajuomien liikkumiseen
+    """
     def __init__(self):
         super().__init__()
         self.image = pygame.image.load('src/assets/energy.png')
@@ -84,6 +103,10 @@ class PointCollector(pygame.sprite.Sprite):
         game_status.energy_level = 4
 
     def start_positions(self):
+        """
+            Kun peli alkaa tai käyttäjä kirjautuu ulos
+            sijainnit määritellään uudestaan
+        """
         if len(self.all_energies) > 0:
             self.all_energies = []
         for _ in range(5):
@@ -92,20 +115,32 @@ class PointCollector(pygame.sprite.Sprite):
             self.all_energies.append((x, y))
 
     def add_rects(self):
+        """
+            Rectit juomien kohdalle, jotta voidaan seurata collisiota
+        """
         if len(self.energy_rects) > 0:
             self.energy_rects = []
         for energy in self.all_energies:
             self.energy_rects.append(pygame.Rect(energy[0], energy[1], self.width, self.height))
 
     def spawn_on_cloud(self, cloud):
+        """
+            Aina välillä juoma pilven päälle
+        """
         if random.choice([True, False]):
             for cloud_location in cloud.clouds:
                 if cloud_location[0] > 1280:
                     return (cloud_location[0] + 50, cloud_location[1] - 20)
         return (random.randint(1280, 5000), 600)
 
-
     def obtainableposition(self, cloud):
+        """
+            Pitää huolen energiajuomien liikkumisesta
+
+            Args:
+                cloud: lista pilvistä, josta etsitään joku
+                minkä päälle energiajuoman voi laittaa
+        """
         if game_status.game_started:
             for index, energy in enumerate(self.all_energies):
                 x = energy[0]
@@ -116,11 +151,21 @@ class PointCollector(pygame.sprite.Sprite):
                     self.all_energies[index] = (x, energy[1])
 
     def energy_consumed(self, energy):
+        """
+            Kollision jälkeen energiajuoma spawnaa ruudun ulkopuolelle
+
+            Args:
+                energy: energiajuoma
+        """
         x = energy[0]
         x += random.randint(1280, 2000)
         return x, 600
 
     def collision_detector(self, player, energy):
+        """
+            Seuraa tapahtuuko pelaajan ja energiajuoman välillä
+            kollisiota
+        """
         for rect in energy.energy_rects:
             if rect.colliderect(player.rect):
                 possible_collision = [
@@ -142,6 +187,11 @@ class PointCollector(pygame.sprite.Sprite):
 
 
 class CloudSpawner(pygame.sprite.Sprite):
+    """
+        Luokka, joka hoitaa pilvien liikuttamisen ja 
+        mahdollistaa niiden päälle hyppäämisen
+    """
+
     def __init__(self):
         super().__init__()
         self.img1 = pygame.image.load('src/assets/pilvi1.png')
@@ -153,6 +203,10 @@ class CloudSpawner(pygame.sprite.Sprite):
         self.add_rects()
 
     def start_positions(self):
+        """
+            Pilvien sijainnit pelin alussa, päivitetään uloskirjautumisen
+            ja pelin käynnistämisen yhteydessä
+        """
         if len(self.clouds) > 0:
             self.clouds = []
         for _ in range(3):
@@ -179,6 +233,13 @@ class CloudSpawner(pygame.sprite.Sprite):
                     self.clouds[index] = (x, y)
 
     def cloudcollision(self, player):
+        """
+            Metodi, joka mahdollistaa pilvien päälle hyppäämisen
+            ja niiden päältä putoamisen
+
+            Args:
+                player: pelaaja
+        """
         was_touching_cloud = player.touching_cloud
         player.touching_cloud = False
 

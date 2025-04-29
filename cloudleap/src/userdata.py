@@ -1,4 +1,8 @@
 class UserData:
+    """
+        Luokka, joka hoitaa käyttäjään liittyvien
+        sql komentojen suorittamisen
+    """
     def __init__(self, connection):
         self._connection = connection
 
@@ -13,6 +17,11 @@ class UserData:
         self._connection.commit()
 
     def update_score(self, best_score, username):
+        """
+            Käyttäjän tulos tallennetaan, jos käyttäjälle on jo olemassa
+            vanhempi tulos, se korvataan uudella parhaalla, jos ei
+            luodaan uusi
+        """
         cursor = self._connection.cursor()
 
         cursor.execute('''
@@ -34,7 +43,7 @@ class UserData:
             ''', {"username":username})
 
         user = cursor.fetchone()
-        return list(user)[1]
+        return list(user)[0] if user else False
 
     def get_score(self, username):
         cursor = self._connection.cursor()
@@ -73,7 +82,7 @@ class UserData:
             ''')
 
         rows = cursor.fetchall()
-        return list(rows)
+        return [row['username'] for row in rows]
 
     def delete_user(self, username):
         cursor = self._connection.cursor()
