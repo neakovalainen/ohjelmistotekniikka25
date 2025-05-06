@@ -33,7 +33,7 @@ class InitializeGame():
 
     def display(self):
         """
-            huolehtii objektien ja taustan piirätmisestä näytölle
+            huolehtii objektien ja taustan piirtämisestä näytölle
         """
         self.screen.fill("white")
         self.screen.blit(self.player.meow, (self.player.x, self.player.y))
@@ -45,6 +45,8 @@ class InitializeGame():
         if not status.logged_in:
             self.screen.blit(self.textmanager.textinput.surface, (10, 160))
         self.textmanager.draw_texts()
+        if status.display_error == True:
+            self.textmanager.error_message()
         pygame.draw.line(self.screen, ("black"), (0, 640), (1280, 640))
         pygame.display.set_caption("cloudleap")
 
@@ -57,10 +59,11 @@ class InitializeGame():
                 if not game_status.game_started:
                     self.space_check()
             if not game_status.game_over:
-                self.position_check(self.energy, self.enemy, self.cloud)
-                self.moving_check(self.player)
-                self.energy.update_rects(self.player, self.cloud, self.enemy)
-                self.collision_check(self.player, self.energy, self.enemy)
+                if game_status.game_started:
+                    self.position_check(self.energy, self.enemy, self.cloud)
+                    self.moving_check(self.player)
+                    self.energy.update_rects(self.player, self.cloud, self.enemy)
+                    self.collision_check(self.player, self.energy, self.enemy)
                 self.display()
                 self.event_check()
                 if not self.running:
@@ -85,12 +88,16 @@ class InitializeGame():
                 pygame.quit()
                 return
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
-                status.login()
-                username = self.textmanager.textinput.value
-                status.current_user(username)
-                if not self.username_check(username):
-                    self.data.save_username(username)
-                self.data.get_all_scores()
+                if " " in self.textmanager.textinput.value:
+                    status.display_error = True
+                else:
+                    status.display_error = False
+                    status.login()
+                    username = self.textmanager.textinput.value
+                    status.current_user(username)
+                    if not self.username_check(username):
+                        self.data.save_username(username)
+                    self.data.get_all_scores()
 
         if not status.logged_in:
             self.textmanager.textinput.update(events)

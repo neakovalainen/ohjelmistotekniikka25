@@ -58,3 +58,17 @@
 13. noin sivun pitunen käyttöohje jee
 14. changelog update
 15. tuntikirjanpito update
+
+# viikko 7
+1. ~~sisäänkirjautumisen virheidenhallinta~~
+~~-> käyttäjä ei pysty laittaa nimekseen esim vaan spacea tai liian pitkää nimeä~~
+2. testikattavuuden kasvatus
+3. koodin laadun parantaminen, tarkista ettei ole mitää, mitä ei käytetä\
+-> "_" tai "__" nimen edessä jos käytetään vain luokan sisäisesti\
+-> funktioiden max pituus 20 riviä\
+-> tarkista et funktiot single responsibility\
+-> ei copypastea
+4. onko docstring dokumentaatiota tarpeeksi
+5. Päivitä määrittelydokumentti
+6. tee testausdokumentti
+7. jos aikaa tee jostain toiminnallisuudesta sekvenssikaavio

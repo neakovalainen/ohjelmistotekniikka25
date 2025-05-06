@@ -6,6 +6,7 @@ class LogInManager():
     def __init__(self):
         self.logged_in = False
         self.username = ""
+        self.display_error = False
 
     def login(self):
         self.logged_in = True

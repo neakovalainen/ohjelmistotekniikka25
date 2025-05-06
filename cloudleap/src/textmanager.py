@@ -11,7 +11,7 @@ class TextManager:
         Luokka, joka huolehtii tekstien, nappien ja inputkentän piirtämisestä
     """
     def __init__(self, player, energy, cloud, enemy, screen, user_data):
-        self.textmanager = pygame_textinput.TextInputManager()
+        self.textmanager = pygame_textinput.TextInputManager(validator=lambda input: len(input) < 11)
         self.textinput = pygame_textinput.TextInputVisualizer(manager=self.textmanager)
         self.textinput.cursor_width = 1
         self.textinput.cursor_blink_interval = 500
@@ -126,3 +126,10 @@ class TextManager:
         self.user_data.delete_user(status.username)
         self.user_data.delete_score(status.username)
         self.logout(True)
+
+    def error_message(self):
+        error_font = pygame.font.Font(FONT, 15)
+        error1 = error_font.render("error, username cannot contain spaces", True, (86, 3, 25))
+        error2 = error_font.render("please try again", True, (86, 3, 25))
+        self.screen.blit(error1, (10, 180))
+        self.screen.blit(error2, (10, 200))
