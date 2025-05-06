@@ -1,11 +1,11 @@
 # Käyttöohjeet
 ## Projektin käynnistäminen
-1. Kun peli on ladattu koneelle, tulle ensiksi sen riippuvuudet ladata komennolla: \
-```poetry install``` \
+1. Kun peli on ladattu koneelle, tulee ensiksi sen riippuvuudet ladata komennolla: \
+```poetry install``` 
 2. Peli käyttää tietokantaa, jonka saa alustettua komennolla: \
-```python3 src/build```\
+```python3 src/build```
 3. Riippuvuuksien lataudutta voi pelin käynnistää: \
-```poetry invoke start```\
+```poetry invoke start```
 
 ## Käyttäjän luominen ja sisään kirjautuminen
 Pelin käynnistyttyä tulisi käyttäjälle näkyä seuraava näkymä:
