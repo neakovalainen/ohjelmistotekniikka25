@@ -11,7 +11,7 @@ Alla oleva luokkakaavio kuvaa luokan InitializeGame ja objekteja hoitavien luokk
 ![luokkakaavio](../src/assets/classdiagram.png)
 
 ## Käyttöliittymä
-Pelin käyttöliittymä on hyvin yksinkertainen. Siinä on periaatteessa kolme näkymää: \
+Pelin käyttöliittymä on hyvin yksinkertainen. Siinä on periaatteessa kolme näkymää:
 - aloitusnäkymä
 - pelinäkymä
 - pelin lopetusnäkymä
