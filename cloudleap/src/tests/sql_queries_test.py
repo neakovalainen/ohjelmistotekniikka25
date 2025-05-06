@@ -1,7 +1,7 @@
 import unittest
-from userdata import UserData
-from sql_connect import get_database_connection
-from sql_queries import initialize_database
+from database.userdata import UserData
+from database.sql_connect import get_database_connection
+from database.sql_queries import initialize_database
 
 class TestSql(unittest.TestCase):
     def setUp(self):

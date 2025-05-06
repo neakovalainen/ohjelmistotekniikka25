@@ -1,4 +1,4 @@
-from sql_connect import get_database_connection
+from database.sql_connect import get_database_connection
 
 def delete_tables(connection):
     cursor = connection.cursor()

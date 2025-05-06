@@ -1,3 +1,3 @@
-from sql_queries import initialize_database
+from database.sql_queries import initialize_database
 
 initialize_database()

@@ -1,10 +1,10 @@
 import os
 import pygame
 from objects import Meow, PointCollector, CloudSpawner, MinusEnergy
-from userdata import UserData
+from database.userdata import UserData
 from textmanager import TextManager
 from shared_resources import status, game_status
-from sql_connect import get_database_connection
+from database.sql_connect import get_database_connection
 from game_over import GameOver
 
 # game character created by @snackanimals on twitter/X

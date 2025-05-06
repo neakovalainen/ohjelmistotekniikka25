@@ -1,0 +1,12 @@
+CREATE TABLE Users (
+    id  SERIAL PRIMARY KEY,
+    username    TEXT UNIQUE,
+);
+CREATE TABLE Scores (
+    id  SERIAL PRIMARY KEY,
+    best_score  INTEGER,
+    username    TEXT UNIQUE,
+
+    FOREIGN KEY (username) REFERENCES Users(username)
+        ON DELETE CASCADE
+);
