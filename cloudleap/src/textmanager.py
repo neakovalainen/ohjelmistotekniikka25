@@ -129,7 +129,7 @@ class TextManager:
 
     def error_message(self):
         error_font = pygame.font.Font(FONT, 15)
-        error1 = error_font.render("error, username cannot contain spaces", True, (86, 3, 25))
+        error1 = error_font.render("error, username cannot be empty or contain spaces", True, (86, 3, 25))
         error2 = error_font.render("please try again", True, (86, 3, 25))
         self.screen.blit(error1, (10, 180))
         self.screen.blit(error2, (10, 200))

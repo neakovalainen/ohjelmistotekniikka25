@@ -88,7 +88,7 @@ class InitializeGame():
                 pygame.quit()
                 return
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
-                if " " in self.textmanager.textinput.value:
+                if " " in self.textmanager.textinput.value or len(self.textmanager.textinput.value) < 1:
                     status.display_error = True
                 else:
                     status.display_error = False
