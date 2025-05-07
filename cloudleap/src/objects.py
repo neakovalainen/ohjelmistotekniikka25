@@ -70,11 +70,17 @@ class Meow(pygame.sprite.Sprite):
         self.jump_force = 0
 
     def forward_check(self):
+        """
+            Metodi tarkastaa liikkuuko käyttäjä eteenpäin
+        """
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT] and self.x <= 1280 - self.meow.get_width():
             self.x += 2
 
     def backwards_check(self):
+        """
+            Metodi tarkastaa liikkuuko käyttäjä taaksepäin
+        """
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             self.x -= 2
@@ -177,6 +183,15 @@ class PointCollector(pygame.sprite.Sprite):
                     game_status.energy_level += 0.25
 
     def update_rects(self, meow, cloud, enemy):
+        """
+            Huolehtii pelaajan, pilvien, vihollisen ja energiajuomien
+            rectien päivittämisestä, ilman niitä collisiota ei havaita
+
+            Args:
+                meow: pelaaja
+                cloud: lista pilvistä
+                enemy: väistettävä tietokone 
+        """
         for index, energy in enumerate(self.all_energies):
             self.energy_rects[index] = pygame.Rect(energy[0], energy[1], self.width, self.height)
         for index, current_cloud in enumerate(cloud.clouds):
@@ -215,12 +230,19 @@ class CloudSpawner(pygame.sprite.Sprite):
             self.clouds.append((x, y))
 
     def add_rects(self):
+        """
+            Pelin aina uudestaan alkaessa, rectit lisätään uudestaan
+            oikeille paikoille
+        """
         if len(self.cloud_rects) > 0:
             self.cloud_rects = []
         for cloud in self.clouds:
             self.cloud_rects.append(pygame.Rect(cloud[0], cloud[1], self.width, self.height))
 
     def cloudposition(self):
+        """
+            Hoitaa pilvien liikkumisen, mikäli peli on alkanut
+        """
         if game_status.game_started:
             for index, cloud in enumerate(self.clouds):
                 x, y = cloud[0], cloud[1]
@@ -279,6 +301,15 @@ class MinusEnergy:
         self.enemies_hit = 0
 
     def negative_collision(self, player, energy, enemy):
+        """
+            Seuraa onko pelaajan ja vihollisen välillä tapahtunut
+            collisiota
+
+            Args:
+            player: pelaaja
+            energy: energia objekti, täällä jotta voitaisiin käyttää enemy_hit()
+            enemy: vihollinen
+        """
         if pygame.sprite.collide_rect(player, enemy):
             energy.points -= 1
             self.enemies_hit += 1

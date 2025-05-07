@@ -103,6 +103,13 @@ class InitializeGame():
         self.textmanager.button_update(events)
 
     def moving_check(self, player):
+        """
+            Pelaajan liikkumisen tarkistus, lisätty erilliseen metodiin, jotta
+            koodi olisi helpommin luettavaa
+
+            Args:
+            player: pelaaja
+        """
         player.forward_check()
         player.backwards_check()
         player.jump_check()

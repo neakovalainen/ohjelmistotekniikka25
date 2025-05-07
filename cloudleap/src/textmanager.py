@@ -97,6 +97,10 @@ class TextManager:
         self.get_users()
 
     def button_update(self, events):
+        """
+            huolehtii log_out ja delete_user painikkeiden päivittämisestä,
+            ilman päivittämistä ne eivät toimi
+        """
         pygame_widgets.update(events)
 
     def update_scores(self):
@@ -105,14 +109,17 @@ class TextManager:
 
     def logout(self, deletion):
         """
-            Metodi, joka huolehtii siitä, että uloskirjautuessa
-            kaikki objektit nollataan
+            Metodi, joka huolehtii siitä, että uloskirjautuessa ja
+            käyttäjän poistaessa kaikki objektit nollataan
+
+            Args:
+            delete: boolean arvo, kertoo ollaanko nyt poistamassa
+            käyttäjää, jos False, kyse vain uloskirjautumisesta
         """
         if not deletion:
             self.energy.best_score = self.energy.points
             self.update_scores()
             game_status.change_game_status()
-            print("not deletion")
         status.logout()
         status.current_user("")
         self.textinput.value = ""
