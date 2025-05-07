@@ -62,7 +62,7 @@
 # viikko 7
 1. ~~sisäänkirjautumisen virheidenhallinta~~
 ~~-> käyttäjä ei pysty laittaa nimekseen esim vaan spacea tai liian pitkää nimeä~~
-2. testikattavuuden kasvatus
+2. ~~testikattavuuden kasvatus~~
 3. koodin laadun parantaminen, tarkista ettei ole mitää, mitä ei käytetä\
 -> "_" tai "__" nimen edessä jos käytetään vain luokan sisäisesti\
 -> funktioiden max pituus 20 riviä\

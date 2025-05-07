@@ -21,6 +21,10 @@ class UserData:
             Käyttäjän tulos tallennetaan, jos käyttäjälle on jo olemassa
             vanhempi tulos, se korvataan uudella parhaalla, jos ei
             luodaan uusi
+
+            Args:
+                best_score: käyttäjän paras tulos, joka tallennetaan
+                username: käyttäjä kenelle tulos kuuluu
         """
         cursor = self._connection.cursor()
 
@@ -34,6 +38,12 @@ class UserData:
         self._connection.commit()
 
     def get_username(self, username):
+        """
+            Metodi, jonka avulla tarkastetaan onko käyttäjää jo olemassa
+
+            Args:
+                username: käyttäjä, jonka olemassa olo halutaan varmistaa
+        """
         cursor = self._connection.cursor()
 
         cursor.execute('''
@@ -46,6 +56,12 @@ class UserData:
         return list(user)[0] if user else False
 
     def get_score(self, username):
+        """
+            Palauttaa käyttäjän parhaan tuloksen
+
+            Args:
+                username: käyttäjä, jonka tulos halutaan palauttaa
+        """
         cursor = self._connection.cursor()
 
         cursor.execute('''
@@ -57,7 +73,7 @@ class UserData:
         score = cursor.fetchone()
         if score:
             return list(score)[0]
-        return -2 #score cannot be -2 so if score = None return this (easier to compare in index.py)
+        return -2 #score cannot be -2 so if score = None return this (easy to compare)
 
 
     def get_all_scores(self):
@@ -85,6 +101,12 @@ class UserData:
         return [row['username'] for row in rows]
 
     def delete_user(self, username):
+        """
+            Metodia kutsutaan, jos käyttäjä haluaa poistaa käyttäjänsä
+
+            Args:
+                username: poistettava käyttäjä
+        """
         cursor = self._connection.cursor()
 
         cursor.execute('''

@@ -95,27 +95,12 @@ class InitializeGame():
                     status.login()
                     username = self.textmanager.textinput.value
                     status.current_user(username)
-                    if not self.username_check(username):
+                    if not self.data.get_username(username):
                         self.data.save_username(username)
-                    self.data.get_all_scores()
 
         if not status.logged_in:
             self.textmanager.textinput.update(events)
         self.textmanager.button_update(events)
-
-    def username_check(self, username):
-        """
-            Hakee tietokannasta tiedon, onko käyttäjää olemassa
-            Palauttaa True jos on, muuten False
-
-            Args:
-            username: käyttäjänimi jonka olemassaolo halutaan varmistaa
-        """
-        all_users = self.data.get_all_users()
-        for user in all_users:
-            if username == user:
-                return True
-        return False
 
     def moving_check(self, player):
         player.forward_check()
