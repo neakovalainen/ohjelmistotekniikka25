@@ -109,8 +109,10 @@ class TextManager:
             kaikki objektit nollataan
         """
         if not deletion:
+            self.energy.best_score = self.energy.points
             self.update_scores()
             game_status.change_game_status()
+            print("not deletion")
         status.logout()
         status.current_user("")
         self.textinput.value = ""
