@@ -70,5 +70,5 @@
 -> ~~ei copypastea~~
 4. ~~onko docstring dokumentaatiota tarpeeksi~~
 5. ~~Päivitä määrittelydokumentti~~
-6. tee testausdokumentti
+6. ~~tee testausdokumentti~~
 7. jos aikaa tee jostain toiminnallisuudesta sekvenssikaavio

@@ -1,10 +1,7 @@
 import unittest
-
-import pygame.tests
 from index import GROUND_HEIGHT
 from objects import Meow, PointCollector, CloudSpawner, MinusEnergy
 from shared_resources import game_status, LogInManager, GameStatus
-import pygame
 
 class TestBackend(unittest.TestCase):
     def setUp(self):

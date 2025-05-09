@@ -23,6 +23,11 @@ Lopetusnäkymä on näistä kahdesta erillinen. Siinä näkyy pelaajan pisteet, 
 Alla oleva sekvenssidiagrammi kuvaa sitä, miten sisäänkirjautuminen toimii. Näkyvien tapahtumien lisäksi InitializeGame kutsuu Luokkaa UserData, joka tallentaa käyttäjän, mikäli sitä ei ole olemassa.
 ![sekvenssikaavio](../src/assets/sequencediagram.png)
 
+## Energiajuoman kerääminen
+Alla näkyy sekvenssikaavio, joka kuvaa suurinpiirtein sitä, mitä tapahtuu, kun pelaaja osuu energiajuomaan.
+
+![tokasekvenssi](../src/assets/seq.png)
+
 ## Tietojen tallentaminen
 Tietojen tallentaminen tapahtuu SQLite-tietokantaan. Tietokannan voi tyhjentää ja alustaa uudelleen pyörittämällä komennon: \
 ``` python3 src/build.py ```  \
