@@ -1,7 +1,7 @@
 import unittest
 
 import pygame.tests
-from index import InitializeGame, GROUND_HEIGHT
+from index import GROUND_HEIGHT
 from objects import Meow, PointCollector, CloudSpawner, MinusEnergy
 from shared_resources import game_status, LogInManager, GameStatus
 import pygame
