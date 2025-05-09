@@ -8,6 +8,7 @@ __cloudleap__ on yksinkertainen tasohyppelypeli, jossa käyttäjä voi kerätä 
 - [arkkitehtuuri](https://github.com/neakovalainen/ohjelmistotekniikka25/tree/main/cloudleap/dokumentaatio/arkkitehtuuri.md)
 - [changelog](https://github.com/neakovalainen/ohjelmistotekniikka25/tree/main/cloudleap/dokumentaatio/changelog.md)
 - [käyttöohjeet](https://github.com/neakovalainen/ohjelmistotekniikka25/blob/main/cloudleap/dokumentaatio/kayttoohje.md)
+- [testausdokumentti]()
 - [releaset](https://github.com/neakovalainen/ohjelmistotekniikka25/releases)
 
 ## käynnistysohjeet
