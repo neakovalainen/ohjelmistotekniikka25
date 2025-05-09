@@ -13,7 +13,7 @@ class GameOver():
         self.small = pygame.font.Font("src/assets/unifont-16.0.02.otf", 30)
 
 
-    def texts(self):
+    def _texts(self):
         """
             Lopetusruudulle piirrettävät tekstit
         """
@@ -24,7 +24,7 @@ class GameOver():
         return big_text, points, small_text, window
 
     def game_over_display(self, time_shown):
-        big_text, points, small_text, window = self.texts()
+        big_text, points, small_text, window = self._texts()
         self.screen.fill("white")
         pygame.draw.rect(self.screen, (139, 0, 0), self.rect, border_radius=5)
         self.screen.blit(big_text, (415, 300))

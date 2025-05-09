@@ -2,9 +2,9 @@ import os
 import pygame
 from objects import Meow, PointCollector, CloudSpawner, MinusEnergy
 from database.userdata import UserData
+from database.sql_connect import get_database_connection
 from textmanager import TextManager
 from shared_resources import status, game_status
-from database.sql_connect import get_database_connection
 from game_over import GameOver
 
 # game character created by @snackanimals on twitter/X
@@ -45,7 +45,7 @@ class InitializeGame():
         if not status.logged_in:
             self.screen.blit(self.textmanager.textinput.surface, (10, 160))
         self.textmanager.draw_texts()
-        if status.display_error == True:
+        if status.display_error:
             self.textmanager.error_message()
         pygame.draw.line(self.screen, ("black"), (0, 640), (1280, 640))
         pygame.display.set_caption("cloudleap")
@@ -70,7 +70,6 @@ class InitializeGame():
                     break
             else:
                 GameOver(self.screen, self.energy.points).game_over_display(8000)
-                self.energy.best_score = self.energy.points
                 self.textmanager.update_scores()
                 break
             pygame.display.flip()
@@ -81,6 +80,7 @@ class InitializeGame():
             Tarkistaa tapahtumat, joiden perusteella uusi käyttäjä tallennetaan,
             tulokset haetaan tietokannasta ja peli-ikkuna suljetaan
         """
+        username = self.textmanager.textinput.value
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.QUIT:
@@ -88,16 +88,14 @@ class InitializeGame():
                 pygame.quit()
                 return
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
-                if " " in self.textmanager.textinput.value or len(self.textmanager.textinput.value) < 1:
+                if " " in username or len(username) < 1:
                     status.display_error = True
                 else:
                     status.display_error = False
                     status.login()
-                    username = self.textmanager.textinput.value
                     status.current_user(username)
                     if not self.data.get_username(username):
                         self.data.save_username(username)
-
         if not status.logged_in:
             self.textmanager.textinput.update(events)
         self.textmanager.button_update(events)

@@ -308,7 +308,7 @@ class MinusEnergy:
             Args:
             player: pelaaja
             energy: energia objekti, täällä jotta voitaisiin käyttää enemy_hit()
-            enemy: vihollinen
+            enemy: vihollinen, keneen osutaan
         """
         if pygame.sprite.collide_rect(player, enemy):
             energy.points -= 1

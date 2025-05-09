@@ -104,6 +104,7 @@ class TextManager:
         pygame_widgets.update(events)
 
     def update_scores(self):
+        self.energy.best_score = self.energy.points
         if self.user_data.get_score(status.username) < self.energy.best_score:
             self.user_data.update_score(self.energy.best_score, status.username)
 
@@ -117,7 +118,6 @@ class TextManager:
             käyttäjää, jos False, kyse vain uloskirjautumisesta
         """
         if not deletion:
-            self.energy.best_score = self.energy.points
             self.update_scores()
             game_status.change_game_status()
         status.logout()

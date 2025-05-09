@@ -91,3 +91,19 @@
 - testien kirjoittelua
 - docstring dokumentaation aloitus
 - tunnit yhteensä: 50
+
+# 06.05.25
+- 3h 
+- virheiden käsittelyä
+- tulosten tallennuksen korjausta
+- tehtävien asioiden selvittämistä
+- tunnit yhteensä: 53
+
+# 07.05.25
+- 1h
+- docstring dokumentaation laajennusta
+- tunnit yhteensä: 54
+
+# 09.05.25
+- pylint virheiden korjailua
+-
