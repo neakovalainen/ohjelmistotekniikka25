@@ -101,7 +101,8 @@ class TextManager:
             huolehtii log_out ja delete_user painikkeiden päivittämisestä,
             ilman päivittämistä ne eivät toimi
         """
-        pygame_widgets.update(events)
+        if status.logged_in:
+            pygame_widgets.update(events)
 
     def update_scores(self):
         self.energy.best_score = self.energy.points
@@ -134,6 +135,8 @@ class TextManager:
     def delete_user(self):
         self.user_data.delete_user(status.username)
         self.user_data.delete_score(status.username)
+        if game_status.game_started:
+            game_status.change_game_status()
         self.logout(True)
 
     def error_message(self):

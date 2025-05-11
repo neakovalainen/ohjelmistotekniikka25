@@ -58,12 +58,12 @@ class InitializeGame():
             if status.logged_in:
                 if not game_status.game_started:
                     self.space_check()
-            if not game_status.game_over:
                 if game_status.game_started:
                     self.position_check(self.energy, self.enemy, self.cloud)
                     self.moving_check(self.player)
                     self.energy.update_rects(self.player, self.cloud, self.enemy)
                     self.collision_check(self.player, self.energy, self.enemy)
+            if not game_status.game_over:
                 self.display()
                 self.event_check()
                 if not self.running:
